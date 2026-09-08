@@ -25,6 +25,6 @@ Github Repo for my GAME 492 project.
               - ``` ```
               - ``` ```
       - Eye Position Switching [4 total] [in JammoChar/Scripts/CharacterSkinController.cs]
-          - Old Code: ``` ``` [x4 w/ switch per direct button]
+          - Old Code: ```Input.GetKeyDown(KeyCode.Alpha1)``` [x4 w/ switch per direct Keycode]
           - New Code: ``` ``` [x4 w/ switch per InputAction]
     - 
