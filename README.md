@@ -17,14 +17,16 @@ Github Repo for my GAME 492 project.
         - [Using] "New" InputAction-Based System covered here: [https://www.youtube.com/watch?v=Yjee_e4fICc](https://www.youtube.com/watch?v=Yjee_e4fICc)
         - [Not Using] "New" Shorthand Class conversion from Old system to New covered here: [https://www.youtube.com/watch?v=Q7NFzES5GMU](https://www.youtube.com/watch?v=Q7NFzES5GMU)
     - New InputAction Implementation Notes:
+      - Config. Or Create New Input Action: [Project Settings --> Input System Package]
+         - Press + button beside Action. Binding must be made per ControlScheme [Keyboard, Touch, Gamepad, etc.].    
       - Horizontal & Vertical Movement Vectors: [in JammoChar/Scripts/MovementInput.cs]
           - Old Code:
               - ```InputX = Input.GetAxis ("Horizontal");```
               - ```InputZ = Input.GetAxis ("Vertical");```
           - New Code:
-              - ``` ```
+              - ``` ``` [InputActions -> Player -> Move -> Vector2]
               - ``` ```
       - Eye Position Switching [4 total] [in JammoChar/Scripts/CharacterSkinController.cs]
           - Old Code: ```Input.GetKeyDown(KeyCode.Alpha1)``` [x4 w/ switch per direct Keycode]
-          - New Code: ``` ``` [x4 w/ switch per InputAction]
+          - New Code: ``` ``` [x4 w/ switch per InputAction - Normal, Happy, Angry, Dead states *in order. Now using 1-4 w/ Keyboard. D-Pad (Up, Left, Right, Down *in that order) w/ Gamepad]    
     - 
