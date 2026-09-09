@@ -8,10 +8,10 @@ Github Repo for my GAME 492 project.
 
 9/8/2026:
 - Goals:
-   - (!!) Convert Jammo input to use NewInputSystem (Currently uses Old System [Non-GUI-Based])
+   - [Done] (!!) Convert Jammo input to use NewInputSystem (Currently uses Old System [Non-GUI-Based])
       - Gamepad support automatic* if done w/ New InputAction system
-   - (!) Look into Cinemachine [dependency for Jammo]
-   - (!) Collect animations for character actions [3x attack animations]
+   - [Watched a video on it] (!) Look into Cinemachine [dependency for Jammo]
+   - [Found & Downloaded 3 anims. Not Sure how to Implement] (!) Collect animations for character actions [3x attack animations] [Mixamo link: [https://www.mixamo.com/#/?genres=Combat](https://www.mixamo.com/#/?genres=Combat)]
    - Later Goal: Adding combo attacks
 - Notes:
    - The "NewInputSystem" is actually more like 5 years old w/ a variety of implementation techniques. Global custom script, use of Global InputAction system, use of shorthand Classes like Mouse/Keyboard, a generated C# class [most known to me atm], and likely more I'm unaware of. Additionally, there's the system before the "New" one, "Old", as well as a GUI-Based input system. Likely other systems as well.
