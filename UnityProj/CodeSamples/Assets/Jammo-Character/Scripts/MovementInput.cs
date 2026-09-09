@@ -1,7 +1,10 @@
 
+#define USE_NEW_INPUT_SYSTEM
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
@@ -63,10 +66,19 @@ public class MovementInput : MonoBehaviour {
     }
 
     void PlayerMoveAndRotation() {
+
+        //MOD: Replace Input.GetAxis with InputSystem Move action
+#if USE_NEW_INPUT_SYSTEM
+        InputAction moveAction = InputSystem.actions.FindAction("Move");
+		Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        InputX = moveValue.x;
+        InputZ = moveValue.y;
+#else
 		InputX = Input.GetAxis ("Horizontal");
 		InputZ = Input.GetAxis ("Vertical");
+#endif
 
-		var camera = Camera.main;
+        var camera = Camera.main;
 		var forward = cam.transform.forward;
 		var right = cam.transform.right;
 
@@ -102,9 +114,18 @@ public class MovementInput : MonoBehaviour {
     }
 
 	void InputMagnitude() {
+
+        //MOD: Replace Input.GetAxis with InputSystem Move action
+#if USE_NEW_INPUT_SYSTEM
+        InputAction moveAction = InputSystem.actions.FindAction("Move");
+        Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        InputX = moveValue.x;
+        InputZ = moveValue.y;
+#else
 		//Calculate Input Vectors
 		InputX = Input.GetAxis ("Horizontal");
 		InputZ = Input.GetAxis ("Vertical");
+#endif
 
 		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
 		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
