@@ -6,6 +6,21 @@ Github Repo for my GAME 492 project.
 
 ### Updates:
 
+9/9/2026:
+- Notes:
+   - Same button:
+   1. punch
+   2. cross
+   3. hur. kick
+
+   ! - Have a way to define when animation attack is Active [where the hitbox is] Active frame window.
+	      - put cube hitbox on Armature -> fist/arm 
+
+   ! - Possible to bake movement into animation but can 
+   ! - when in attack animation, no movement
+
+   ! - idea of combo. Within a certain amount of time allow combo.
+
 9/8/2026:
 - Goals:
    - [Done] (!!) Convert Jammo input to use NewInputSystem (Currently uses Old System [Non-GUI-Based])
