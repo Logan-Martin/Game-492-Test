@@ -25,9 +25,28 @@ Github Repo for my GAME 492 project.
               - ```InputX = Input.GetAxis ("Horizontal");```
               - ```InputZ = Input.GetAxis ("Vertical");```
           - New Code:
-              - ``` ``` [InputActions -> Player -> Move -> Vector2]
-              - ``` ```
+              - ```
+                public Vector2 playerInput_MovementVector;
+                // and then assignment where needed within existing code.
+                // InputX = playerInput_MovementVector.x;
+                // InputZ = playerInput_MovementVector.y;
+                
+                public void UpdateInput_PlayerMovementVector2(InputAction.CallbackContext context)
+                {
+                   playerInput_MovementVector = context.ReadValue<Vector2>(); // read from context as a Vector2, as is the type
+                }
+                ```
       - Eye Position Switching [4 total] [in JammoChar/Scripts/CharacterSkinController.cs]
           - Old Code: ```Input.GetKeyDown(KeyCode.Alpha1)``` [x4 w/ switch per direct Keycode]
-          - New Code: ``` ``` [x4 w/ switch per InputAction - Normal, Happy, Angry, Dead states *in order. Now using 1-4 w/ Keyboard. D-Pad (Up, Left, Right, Down *in that order) w/ Gamepad]    
-    - 
+          - New Code:
+             - ```
+               // [x4 w/ switch per InputAction - Normal, Happy, Angry, Dead states *in order. Now using 1-4 w/ Keyboard. D-Pad (Up, Left, Right, Down *in that order) w/ Gamepad]
+               public void ChangeEyesOnInput_Normal(InputAction.CallbackContext context) // event connected to EventSystem GameObj. -> PlayerInput
+               {
+                  if (context.performed) { // if statement to stop x3 [start, performed, end] firing
+                     //ChangeMaterialSettings(0);
+                     ChangeEyeOffset(EyePosition.normal);
+                     ChangeAnimatorIdle("normal");
+                  }
+               }
+               ```    
