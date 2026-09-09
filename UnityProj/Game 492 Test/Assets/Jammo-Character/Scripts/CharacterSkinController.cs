@@ -23,34 +23,44 @@ public class CharacterSkinController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeEyesOnInput_Normal(InputAction.CallbackContext context) // event connected to EventSystem GameObj. -> PlayerInput
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
+        if (context.performed) { // if statement to stop x3 [start, performed, end] firing
             //ChangeMaterialSettings(0);
             ChangeEyeOffset(EyePosition.normal);
             ChangeAnimatorIdle("normal");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            //ChangeMaterialSettings(1);
-            ChangeEyeOffset(EyePosition.angry);
-            ChangeAnimatorIdle("angry");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+    }
+    public void ChangeEyesOnInput_Happy(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
             //ChangeMaterialSettings(2);
             ChangeEyeOffset(EyePosition.happy);
             ChangeAnimatorIdle("happy");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+    }
+    public void ChangeEyesOnInput_Angry(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            //ChangeMaterialSettings(1);
+            ChangeEyeOffset(EyePosition.angry);
+            ChangeAnimatorIdle("angry");
+        }
+    }
+    public void ChangeEyesOnInput_Dead(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
             //ChangeMaterialSettings(3);
             ChangeEyeOffset(EyePosition.dead);
             ChangeAnimatorIdle("dead");
         }
     }
+
+
+
 
     void ChangeAnimatorIdle(string trigger)
     {

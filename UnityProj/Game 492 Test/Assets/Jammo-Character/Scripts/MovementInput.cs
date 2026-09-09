@@ -1,7 +1,9 @@
 
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
@@ -13,6 +15,9 @@ public class MovementInput : MonoBehaviour {
 
 	public float InputX;
 	public float InputZ;
+	public Vector2 playerInput_MovementVector; 
+
+
 	public Vector3 desiredMoveDirection;
 	public bool blockRotationPlayer;
 	public float desiredRotationSpeed = 0.1f;
@@ -36,13 +41,27 @@ public class MovementInput : MonoBehaviour {
     public float verticalVel;
     private Vector3 moveVector;
 
-	// Use this for initialization
-	void Start () {
+	private PlayerInput playerInput; // For NewInputSystem
+
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+    // Use this for initialization
+    void Start () {
 		anim = this.GetComponent<Animator> ();
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
 	}
 	
+    public void UpdateInput_PlayerMovementVector2(InputAction.CallbackContext context)
+    {
+        playerInput_MovementVector = context.ReadValue<Vector2>(); // read from context as a Vector2, as is the type
+    }
+
+
 	// Update is called once per frame
 	void Update () {
 		InputMagnitude ();
@@ -63,10 +82,14 @@ public class MovementInput : MonoBehaviour {
     }
 
     void PlayerMoveAndRotation() {
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
+		//InputX = Input.GetAxis ("Horizontal");
+		//InputZ = Input.GetAxis ("Vertical");
+		InputX = playerInput_MovementVector.x;
+		InputZ = playerInput_MovementVector.y;
 
-		var camera = Camera.main;
+
+
+        var camera = Camera.main;
 		var forward = cam.transform.forward;
 		var right = cam.transform.right;
 
@@ -102,15 +125,17 @@ public class MovementInput : MonoBehaviour {
     }
 
 	void InputMagnitude() {
-		//Calculate Input Vectors
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
+        //Calculate Input Vectors
+        //InputX = Input.GetAxis ("Horizontal");
+        //InputZ = Input.GetAxis ("Vertical");
+        InputX = playerInput_MovementVector.x;
+        InputZ = playerInput_MovementVector.y;
 
-		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
-		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
+        //anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
+        //anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
 
-		//Calculate the Input Magnitude
-		Speed = new Vector2(InputX, InputZ).sqrMagnitude;
+        //Calculate the Input Magnitude
+        Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
         //Physically move player
 
