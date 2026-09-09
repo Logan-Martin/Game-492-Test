@@ -24,7 +24,7 @@ public class CharacterSkinController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //ChangeMaterialSettings(0);
             ChangeEyeOffset(EyePosition.normal);
@@ -47,7 +47,7 @@ public class CharacterSkinController : MonoBehaviour
             //ChangeMaterialSettings(3);
             ChangeEyeOffset(EyePosition.dead);
             ChangeAnimatorIdle("dead");
-        }
+        }*/
     }
 
     void ChangeAnimatorIdle(string trigger)
