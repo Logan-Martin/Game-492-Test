@@ -6,20 +6,18 @@ Github Repo for my GAME 492 project.
 
 ### Updates:
 
+9/10/2026:
+- Cleaned up previous day's formatting.
+
 9/9/2026:
 - Notes:
-   - Same button:
-   1. punch
-   2. cross
-   3. hur. kick
-
-   ! - Have a way to define when animation attack is Active [where the hitbox is] Active frame window.
-	      - put cube hitbox on Armature -> fist/arm 
-
-   ! - Possible to bake movement into animation but can 
-   ! - when in attack animation, no movement
-
-   ! - idea of combo. Within a certain amount of time allow combo.
+   - Use the same button for punch, cross, and hurricane kick. Change in attack based on presses in succession.
+   - It's possible to bake movement into animation but can shouldn't for ease of changing that
+   - Have a way to define when animation attack is Active [where the hitbox is] Active frame window.
+	 - put cube hitbox on Armature -> fist/arm 
+   - When in attack animation, no movement
+   - idea of combo. Within a certain amount of time allow combo.
+- Goal: Implement attack that changes animation based on presses of the same button in succession 
 
 9/8/2026:
 - Goals:
