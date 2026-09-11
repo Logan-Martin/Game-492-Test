@@ -8,6 +8,9 @@ Github Repo for my GAME 492 project.
 
 9/10/2026:
 - Cleaned up previous day's formatting.
+- Looked at the params of context from ```InputAction.CallbackContext```
+	- Unity Docs: [https://docs.unity3d.com/Packages/com.unity.inputsystem@1.20/api/UnityEngine.InputSystem.InputAction.CallbackContext.html](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.20/api/UnityEngine.InputSystem.InputAction.CallbackContext.html)
+- 
 
 9/9/2026:
 - Notes:
