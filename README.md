@@ -7,18 +7,19 @@ Github Repo for my GAME 492 project.
 ### Updates:
 
 9/10/2026:
+- Added PlrAttackSystem script w/ time-sensitive chain outputs
+   - Key thing to work on next: Animation phases w/ animation events. Enum started w/ phases. 
 - Cleaned up previous day's formatting.
 - Looked at the params of context from ```InputAction.CallbackContext```
 	- Unity Docs: [https://docs.unity3d.com/Packages/com.unity.inputsystem@1.20/api/UnityEngine.InputSystem.InputAction.CallbackContext.html](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.20/api/UnityEngine.InputSystem.InputAction.CallbackContext.html)
-- 
 
 9/9/2026:
 - Notes:
    - Use the same button for punch, cross, and hurricane kick. Change in attack based on presses in succession.
-   - It's possible to bake movement into animation but can shouldn't for ease of changing that
-   - Have a way to define when animation attack is Active [where the hitbox is] Active frame window.
-	 - put cube hitbox on Armature -> fist/arm 
-   - When in attack animation, no movement
+   - (!) It's possible to bake movement into animation but can shouldn't for ease of changing that
+   - (!) Have a way to define when animation attack is Active [where the hitbox is] Active frame window.
+	 - (!) put cube hitbox on Armature -> fist/arm 
+   - (!) When in attack animation, no movement
    - idea of combo. Within a certain amount of time allow combo.
 - Goal: Implement attack that changes animation based on presses of the same button in succession 
 
