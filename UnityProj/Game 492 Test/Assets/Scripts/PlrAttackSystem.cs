@@ -22,7 +22,7 @@ public class PlrAttackSystem : MonoBehaviour
 {
     public Animator animator; //assuming i need this to change anims
                        // CharacterSkinController does ```animator.SetTrigger(str trigger);```
-    MovementInput movementInputScript_Ref;
+    public MovementInput movementInputScript_Ref;
 
     float tSinceLastPerfAttack = 0f; // will store to compare old and next Time.time
     float tWindowToAllowNxtAttack = 1f;
@@ -49,7 +49,7 @@ public class PlrAttackSystem : MonoBehaviour
     public void AttackAnim_Leaving()
     {
         lastAnimPhase = CustomAnimationPhaseType.LeavingPhase;
-        movementInputScript_Ref.TogglePlayerMovement(false);
+        movementInputScript_Ref.TogglePlayerMovement(true);
         // ---- //
         //lastAttackType = AttackType.None; //? no cause logic on combo w/ timing
     }

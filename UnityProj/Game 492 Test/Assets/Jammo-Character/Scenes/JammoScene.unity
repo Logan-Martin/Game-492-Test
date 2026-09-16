@@ -4101,6 +4101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlrAttackSystem
   animator: {fileID: 5006512736820427414}
+  movementInputScript_Ref: {fileID: 4757836857439838590}
 --- !u!95 &5006512736820427414 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7635726066119915157, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
