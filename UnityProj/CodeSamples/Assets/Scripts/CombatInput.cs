@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CombatInput : MonoBehaviour
 {
+    MovementInput movementInput;
     Animator animator;
     public GameObject hitBox_LeftHand;
     public GameObject hitBox_RightHand;
@@ -11,6 +12,7 @@ public class CombatInput : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        movementInput = GetComponent<MovementInput>();
 
         if(hitBox_LeftHand != null)
         {
@@ -65,6 +67,14 @@ public class CombatInput : MonoBehaviour
         if (hitBox_RightHand != null)
         {
             hitBox_RightHand.SetActive(false);
+        }
+    }
+
+    void SetForcedForwardSpeed(float speed)
+    {
+        if(movementInput != null)
+        {
+            movementInput.ForcedForwardSpeed = speed;
         }
     }
 }

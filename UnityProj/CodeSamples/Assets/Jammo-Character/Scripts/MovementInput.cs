@@ -14,6 +14,8 @@ public class MovementInput : MonoBehaviour {
     public bool EnableVelocity;
     public bool EnableDirectionChange;
 
+    public float ForcedForwardSpeed;
+
     public float Velocity;
     [Space]
 
@@ -46,6 +48,7 @@ public class MovementInput : MonoBehaviour {
 	void Start () {
         EnableVelocity = true;
         EnableDirectionChange = true;
+        ForcedForwardSpeed = 0.0f;
 
         anim = this.GetComponent<Animator> ();
 		cam = Camera.main;
@@ -103,6 +106,11 @@ public class MovementInput : MonoBehaviour {
         if(EnableVelocity)
         {
             currentVelocity = Velocity;
+        }
+
+        if(ForcedForwardSpeed != 0.0f)
+        {
+            currentVelocity = ForcedForwardSpeed;
         }
 
 		if (blockRotationPlayer == false) {
