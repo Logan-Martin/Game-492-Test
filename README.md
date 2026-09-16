@@ -6,6 +6,13 @@ Github Repo for my GAME 492 project.
 
 ### Updates:
 
+9/15/2026:
+- Added Animations to Animator w/ Transition [Triggers]
+   - This is done by having the Animator open, selecting an animation asset [under FBX asset imported], right-clicking inside the Animator, and adding by Selection.
+   - Then add a transition of Trigger or Bool or other type. Right-click the AnyState node in Animator, select option to make transition. Unity does most work automatically.
+   - Click on Arrow transition made, scroll down to Condition, and add respective transition Trigger or other Type. 
+- 
+
 9/10/2026:
 - Added PlrAttackSystem script w/ time-sensitive chain outputs
    - Key thing to work on next: Animation phases w/ animation events. Enum started w/ phases. 
