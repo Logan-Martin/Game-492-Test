@@ -11,6 +11,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class MovementInput : MonoBehaviour {
 
+    public bool EnableVelocity;
+    public bool EnableDirectionChange;
+
     public float Velocity;
     [Space]
 
@@ -41,7 +44,10 @@ public class MovementInput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		anim = this.GetComponent<Animator> ();
+        EnableVelocity = true;
+        EnableDirectionChange = true;
+
+        anim = this.GetComponent<Animator> ();
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
 	}
@@ -70,7 +76,7 @@ public class MovementInput : MonoBehaviour {
         //MOD: Replace Input.GetAxis with InputSystem Move action
 #if USE_NEW_INPUT_SYSTEM
         InputAction moveAction = InputSystem.actions.FindAction("Move");
-		Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        Vector2 moveValue = moveAction.ReadValue<Vector2>();
         InputX = moveValue.x;
         InputZ = moveValue.y;
 #else
@@ -79,20 +85,29 @@ public class MovementInput : MonoBehaviour {
 #endif
 
         var camera = Camera.main;
-		var forward = cam.transform.forward;
-		var right = cam.transform.right;
+        var forward = cam.transform.forward;
+        var right = cam.transform.right;
 
-		forward.y = 0f;
-		right.y = 0f;
+        forward.y = 0f;
+        right.y = 0f;
 
-		forward.Normalize ();
-		right.Normalize ();
+        forward.Normalize();
+        right.Normalize();
 
-		desiredMoveDirection = forward * InputZ + right * InputX;
+        if (EnableDirectionChange)
+        {
+            desiredMoveDirection = forward * InputZ + right * InputX;
+        }
+
+        float currentVelocity = 0.0f;
+        if(EnableVelocity)
+        {
+            currentVelocity = Velocity;
+        }
 
 		if (blockRotationPlayer == false) {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
-            controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
+            controller.Move(desiredMoveDirection * Time.deltaTime * currentVelocity);
 		}
 	}
 
