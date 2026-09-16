@@ -6,6 +6,14 @@ Github Repo for my GAME 492 project.
 
 ### Updates:
 
+9/16/2026:
+- To Do:
+   - Need hitbox on arms and toggle them based on action state
+   - Animation transition actually playing [need begin transition and transition back to start. watch out for conditions]
+   - Moving Forward:
+      - Target dummy w/ Health & OnTrigger Event w/ good feedback [make feel like we're act punching the thing]
+         - Say an animation for death, one for taking a hit, and idle  
+
 9/15/2026:
 - Added Animations to Animator w/ Transition [Triggers]
    - This is done by having the Animator open, selecting an animation asset [under FBX asset imported], right-clicking inside the Animator, and adding by Selection.
