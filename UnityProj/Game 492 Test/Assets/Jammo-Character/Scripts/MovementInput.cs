@@ -20,6 +20,7 @@ public class MovementInput : MonoBehaviour {
 
 	public Vector3 desiredMoveDirection;
 	public bool blockRotationPlayer;
+    private bool allowPlayerMovement = true;
 	public float desiredRotationSpeed = 0.1f;
 	public Animator anim;
 	public float Speed;
@@ -42,7 +43,12 @@ public class MovementInput : MonoBehaviour {
     private Vector3 moveVector;
 
 	private PlayerInput playerInput; // For NewInputSystem
+    // 00000000000000 //
 
+    public void TogglePlayerMovement(bool toggle)
+    {
+        allowPlayerMovement = toggle;
+    }
 
     private void Awake()
     {
@@ -138,12 +144,17 @@ public class MovementInput : MonoBehaviour {
         Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
         //Physically move player
-
-		if (Speed > allowPlayerRotation) {
-			anim.SetFloat ("Blend", Speed, StartAnimTime, Time.deltaTime);
-			PlayerMoveAndRotation ();
-		} else if (Speed < allowPlayerRotation) {
-			anim.SetFloat ("Blend", Speed, StopAnimTime, Time.deltaTime);
-		}
+        if (allowPlayerMovement)
+        {
+            if (Speed > allowPlayerRotation)
+            {
+                anim.SetFloat("Blend", Speed, StartAnimTime, Time.deltaTime);
+                PlayerMoveAndRotation();
+            }
+            else if (Speed < allowPlayerRotation)
+            {
+                anim.SetFloat("Blend", Speed, StopAnimTime, Time.deltaTime);
+            }
+        }
 	}
 }
