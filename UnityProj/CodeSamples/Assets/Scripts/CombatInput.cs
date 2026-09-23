@@ -5,24 +5,12 @@ public class CombatInput : MonoBehaviour
 {
     MovementInput movementInput;
     Animator animator;
-    public GameObject hitBox_LeftHand;
-    public GameObject hitBox_RightHand;
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponent<Animator>();
         movementInput = GetComponent<MovementInput>();
-
-        if(hitBox_LeftHand != null)
-        {
-            hitBox_LeftHand.SetActive(false);
-        }
-
-        if (hitBox_RightHand != null)
-        {
-            hitBox_RightHand.SetActive(false);
-        }
     }
 
     // Update is called once per frame
@@ -37,38 +25,7 @@ public class CombatInput : MonoBehaviour
             }
         }
     }
-
-    void EnableHitBox_LeftHand()
-    {
-        if (hitBox_LeftHand != null)
-        {
-            hitBox_LeftHand.SetActive(true);
-        }
-    }
-
-    void DisableHitBox_LeftHand()
-    {
-        if (hitBox_LeftHand != null)
-        {
-            hitBox_LeftHand.SetActive(false);
-        }
-    }
-
-    void EnableHitBox_RightHand()
-    {
-        if (hitBox_RightHand != null)
-        {
-            hitBox_RightHand.SetActive(true);
-        }
-    }
-
-    void DisableHitBox_RightHand()
-    {
-        if (hitBox_RightHand != null)
-        {
-            hitBox_RightHand.SetActive(false);
-        }
-    }
+        
 
     void SetForcedForwardSpeed(float speed)
     {
