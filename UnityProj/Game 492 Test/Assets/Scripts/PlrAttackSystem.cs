@@ -23,6 +23,8 @@ public class PlrAttackSystem : MonoBehaviour
     public Animator animator; //assuming i need this to change anims
                        // CharacterSkinController does ```animator.SetTrigger(str trigger);```
     public MovementInput movementInputScript_Ref;
+    public GameObject punchHitbox_R;
+    public GameObject punchHitbox_L;
 
     float tSinceLastPerfAttack = 0f; // will store to compare old and next Time.time
     float tWindowToAllowNxtAttack = 1f;
@@ -83,6 +85,14 @@ public class PlrAttackSystem : MonoBehaviour
         tSinceLastPerfAttack = Time.time;
         animator.SetTrigger("PlayAttackAnim3");
         // ---- //
+    }
+    private void ToggleAttackHitbox_R()
+    {
+        punchHitbox_R.SetActive(!punchHitbox_R.activeSelf);
+    }
+    private void ToggleAttackHitbox_L()
+    {
+        punchHitbox_L.SetActive(!punchHitbox_L.activeSelf);
     }
 
     public void InputFunc_Attack(InputAction.CallbackContext context) // event needs to be connected to EventSystem GameObj. -> PlayerInput
