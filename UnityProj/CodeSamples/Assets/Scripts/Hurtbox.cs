@@ -17,6 +17,12 @@ public class Hurtbox : MonoBehaviour
                 if(incomingHitbox.hitsRemaining > 0)
                 {
                     --incomingHitbox.hitsRemaining;
+
+                    if (incomingHitbox.hitEffectPrefab != null)
+                    {
+                        GameObject.Instantiate(incomingHitbox.hitEffectPrefab, other.gameObject.transform.position, Quaternion.identity);
+                    }
+
                     Debug.Log("I (" + gameObject.name + ") was hit by " + other.gameObject.name);
                     if (animator != null)
                     {

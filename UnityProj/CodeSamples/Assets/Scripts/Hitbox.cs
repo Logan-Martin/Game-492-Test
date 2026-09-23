@@ -10,5 +10,6 @@ public class Hitbox : MonoBehaviour
 
     public CombatTeam team;
     public int hitsRemaining;
-    
+
+    public GameObject hitEffectPrefab;
 }

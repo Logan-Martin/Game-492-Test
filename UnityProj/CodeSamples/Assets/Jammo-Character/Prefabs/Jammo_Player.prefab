@@ -752,6 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   team: 0
   hitsRemaining: 0
+  hitEffectPrefab: {fileID: 4515497926535975121, guid: bddb971e34eb14d48be30c7b922eb077, type: 3}
 --- !u!65 &6931216718972673626
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5402,6 +5403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   team: 0
   hitsRemaining: 0
+  hitEffectPrefab: {fileID: 4515497926535975121, guid: bddb971e34eb14d48be30c7b922eb077, type: 3}
 --- !u!65 &2608568219346746825
 BoxCollider:
   m_ObjectHideFlags: 0
