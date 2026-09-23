@@ -64,13 +64,13 @@ public class HealthSystem : MonoBehaviour
         if (tempCheck < 0)
         {
             tempCheck = 0;
-            animator.SetTrigger("PlayCharDeathAnimation");
+            animator.SetTrigger("PlayCharDeathAnim");
             ResetPlayer();
             return;
         }
         health = tempCheck;
         print("took damage!");
-        animator.SetTrigger("PlayCharHitAnim");
+        animator.SetTrigger("PlayCharTakingPunchAnim");
         //healthTextComponent.text = "Health: " + health + " / " + maxHealth;
     }
 

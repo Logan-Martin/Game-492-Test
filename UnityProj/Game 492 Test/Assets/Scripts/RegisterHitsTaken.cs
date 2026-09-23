@@ -4,14 +4,15 @@ using UnityEngine;
 public class RegisterHitsTaken : MonoBehaviour
 {
     HealthSystem healthSystemRef;
+    string currentTag = "";
+    public string strToAllow = "";
+
 
     private void Start()
     {
+        currentTag = this.gameObject.tag;
         healthSystemRef = GetComponent<HealthSystem>();
     }
-
-    string currentTag = "";
-    public string strToAllow = "";
 
     private void OnTriggerEnter(Collider other)
     {
