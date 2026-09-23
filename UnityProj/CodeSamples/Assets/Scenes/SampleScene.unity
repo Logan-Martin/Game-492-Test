@@ -2617,6 +2617,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844505758}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &999384237
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.076409
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.0591075
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.27530643
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9613566
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -211.961
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992222749655947583, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_Name
+      value: Jammo_Enemy (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
 --- !u!1 &1002600153
 GameObject:
   m_ObjectHideFlags: 3
@@ -3115,6 +3172,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307816742}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1373551913
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.42081922
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9071446
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -130.227
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390975004650973996, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992222749655947583, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
+      propertyPath: m_Name
+      value: Jammo_Enemy (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58ac047cf8eec2945862b57e0503e8f7, type: 3}
 --- !u!1 &1427171998
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,3 +4434,5 @@ SceneRoots:
   - {fileID: 504705318}
   - {fileID: 1140798963}
   - {fileID: 7739288703503406318}
+  - {fileID: 1373551913}
+  - {fileID: 999384237}

@@ -751,6 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   team: 0
+  hitsRemaining: 0
 --- !u!65 &6931216718972673626
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2153,6 +2154,7 @@ Transform:
   - {fileID: 4494418218088283728}
   - {fileID: 4977372144643668229}
   - {fileID: 3107201403744340549}
+  - {fileID: 5364686045992415037}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7635726066119915157
@@ -4245,7 +4247,6 @@ Transform:
   - {fileID: 9027401759494858112}
   - {fileID: 3347735418540642312}
   - {fileID: 49447877029854415}
-  - {fileID: 5364686045992415037}
   m_Father: {fileID: 8231537208724914221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6044274241663812781
@@ -4428,12 +4429,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6097614614063837215}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0101, z: -0}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7828616, z: 0.025171863}
+  m_LocalScale: {x: 0.84, y: 0.84, z: 0.84}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 38101694036556137}
+  m_Father: {fileID: 539745478100655087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4237112804099731819
 MeshFilter:
@@ -4528,6 +4529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
   team: 0
+  animator: {fileID: 7635726066119915157}
 --- !u!54 &8381518503408622422
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5399,6 +5401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   team: 0
+  hitsRemaining: 0
 --- !u!65 &2608568219346746825
 BoxCollider:
   m_ObjectHideFlags: 0

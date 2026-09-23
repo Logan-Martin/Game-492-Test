@@ -18,35 +18,44 @@ public class HitBoxEvents : MonoBehaviour
         }
     }
 
+    void EnableHitBox(GameObject hitBox)
+    {
+        if(hitBox != null)
+        {
+            hitBox.SetActive(true);
+            Hitbox hitboxComponent = hitBox.GetComponent<Hitbox>();
+            if (hitboxComponent != null)
+            {
+                hitboxComponent.hitsRemaining = 1;
+            }
+        }
+    }
+
+    void DisableHitBox(GameObject hitBox)
+    {
+        if (hitBox != null)
+        {
+            hitBox.SetActive(false);
+        }
+    }
+
     void EnableHitBox_LeftHand()
     {
-        if (hitBox_LeftHand != null)
-        {
-            hitBox_LeftHand.SetActive(true);
-        }
+        EnableHitBox(hitBox_LeftHand);
     }
 
     void DisableHitBox_LeftHand()
     {
-        if (hitBox_LeftHand != null)
-        {
-            hitBox_LeftHand.SetActive(false);
-        }
+        DisableHitBox(hitBox_LeftHand);
     }
 
     void EnableHitBox_RightHand()
     {
-        if (hitBox_RightHand != null)
-        {
-            hitBox_RightHand.SetActive(true);
-        }
+        EnableHitBox(hitBox_RightHand);
     }
 
     void DisableHitBox_RightHand()
     {
-        if (hitBox_RightHand != null)
-        {
-            hitBox_RightHand.SetActive(false);
-        }
+        DisableHitBox(hitBox_RightHand);
     }
 }
