@@ -3302,9 +3302,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1472634214}
-    - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1472634213}
     - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       insertIndex: -1
@@ -3329,11 +3326,6 @@ Transform:
 --- !u!4 &1472634208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1245275053966154892, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
-  m_PrefabInstance: {fileID: 1472634205}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1472634210 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7635726066119915157, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
   m_PrefabInstance: {fileID: 1472634205}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &1472634211
@@ -3387,22 +3379,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.15
---- !u!114 &1472634214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472634206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a738498cb58ae794e8d2cf1e057c90c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlrAttackSystem
-  animator: {fileID: 1472634210}
-  movementInputScript_Ref: {fileID: 0}
-  punchHitbox_R: {fileID: 1548997014}
-  punchHitbox_L: {fileID: 1782259332}
 --- !u!114 &1472634215
 MonoBehaviour:
   m_ObjectHideFlags: 0
