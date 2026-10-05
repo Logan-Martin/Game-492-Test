@@ -20,7 +20,8 @@ public class Hurtbox : MonoBehaviour
 
                     if (incomingHitbox.hitEffectPrefab != null)
                     {
-                        GameObject.Instantiate(incomingHitbox.hitEffectPrefab, other.gameObject.transform.position, Quaternion.identity);
+                        GameObject hitEffect = GameObject.Instantiate(incomingHitbox.hitEffectPrefab, other.gameObject.transform.position, Quaternion.identity);
+                        Destroy(hitEffect, 1.0f);
                     }
 
                     Debug.Log("I (" + gameObject.name + ") was hit by " + other.gameObject.name);
