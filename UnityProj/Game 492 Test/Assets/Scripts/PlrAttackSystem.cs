@@ -27,6 +27,8 @@ public class PlrAttackSystem : MonoBehaviour
     public GameObject punchHitbox_L;
     public GameObject hurrKickHitbox;
 
+    public bool isThisCharCurrAttacking = false;
+
     float tSinceLastPerfAttack = 0f; // will store to compare old and next Time.time
     float tWindowToAllowNxtAttack = 1f;
     AttackType lastAttackType = AttackType.None; // None, Base, 2nd, 3rd
@@ -47,6 +49,8 @@ public class PlrAttackSystem : MonoBehaviour
     public void AttackAnim_Action(string str)
     {
         lastAnimPhase = CustomAnimationPhaseType.ActionPhase;
+
+        isThisCharCurrAttacking = true;
 
         print(str);
         if (str == "" || str == null)
@@ -80,6 +84,7 @@ public class PlrAttackSystem : MonoBehaviour
     {
         lastAnimPhase = CustomAnimationPhaseType.LeavingPhase;
         movementInputScript_Ref.TogglePlayerMovement(true);
+        isThisCharCurrAttacking = false;
         // ---- //
         punchHitbox_L.SetActive(false);
         punchHitbox_R.SetActive(false);
