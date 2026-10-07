@@ -64,7 +64,7 @@ ModelImporter:
         messageOptions: 0
       - time: 0.3646643
         functionName: AttackAnim_Action
-        data: 
+        data: RightHand
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
