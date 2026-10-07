@@ -25,6 +25,7 @@ public class PlrAttackSystem : MonoBehaviour
     public MovementInput movementInputScript_Ref;
     public GameObject punchHitbox_R;
     public GameObject punchHitbox_L;
+    public GameObject hurrKickHitbox;
 
     float tSinceLastPerfAttack = 0f; // will store to compare old and next Time.time
     float tWindowToAllowNxtAttack = 1f;
@@ -43,19 +44,46 @@ public class PlrAttackSystem : MonoBehaviour
         lastAnimPhase = CustomAnimationPhaseType.StartingPhase;
         movementInputScript_Ref.TogglePlayerMovement(false);
     }
-    public void AttackAnim_Action()
+    public void AttackAnim_Action(string str)
     {
         lastAnimPhase = CustomAnimationPhaseType.ActionPhase;
-        punchHitbox_L.SetActive(true);
-        punchHitbox_R.SetActive(true);
+
+        print(str);
+        if (str == "" || str == null)
+        {
+            print("Action anim event fired but no str data was given!");
+        }
+        else if (str == "BothHands")
+        {
+            punchHitbox_L.SetActive(true);
+            punchHitbox_R.SetActive(true);
+        }
+        else if (str == "LeftHand")
+        {
+            punchHitbox_L.SetActive(true);
+        }
+        else if (str == "RightHand")
+        {
+            punchHitbox_R.SetActive(true);
+        }
+        else if (str == "TornadoKick")
+        {
+            hurrKickHitbox.SetActive(true);
+        }
+        else
+        {
+            print("Action anim event fired but not in cases to catch. String typed wrong?");
+        }
         // can attack / do dmg to another now
     }
     public void AttackAnim_Leaving()
     {
         lastAnimPhase = CustomAnimationPhaseType.LeavingPhase;
         movementInputScript_Ref.TogglePlayerMovement(true);
+        // ---- //
         punchHitbox_L.SetActive(false);
         punchHitbox_R.SetActive(false);
+        hurrKickHitbox.SetActive(false);
         // ---- //
         //lastAttackType = AttackType.None; //? no cause logic on combo w/ timing
     }
