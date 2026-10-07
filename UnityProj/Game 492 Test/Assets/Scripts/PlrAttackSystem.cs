@@ -46,12 +46,16 @@ public class PlrAttackSystem : MonoBehaviour
     public void AttackAnim_Action()
     {
         lastAnimPhase = CustomAnimationPhaseType.ActionPhase;
+        punchHitbox_L.SetActive(true);
+        punchHitbox_R.SetActive(true);
         // can attack / do dmg to another now
     }
     public void AttackAnim_Leaving()
     {
         lastAnimPhase = CustomAnimationPhaseType.LeavingPhase;
         movementInputScript_Ref.TogglePlayerMovement(true);
+        punchHitbox_L.SetActive(false);
+        punchHitbox_R.SetActive(false);
         // ---- //
         //lastAttackType = AttackType.None; //? no cause logic on combo w/ timing
     }
