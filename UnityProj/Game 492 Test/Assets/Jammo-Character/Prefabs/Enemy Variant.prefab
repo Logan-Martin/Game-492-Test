@@ -464,6 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RegisterHitsTaken
   healthSystemRef: {fileID: 1819046060954435615}
   strToAllow: PlrAttackHitbox
+  hitVFX_Prefab_Ref: {fileID: 8762405910555896786, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
 --- !u!54 &4055716546435053582
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public class RegisterHitsTaken : MonoBehaviour
     public HealthSystem healthSystemRef;
     string currentTag = "";
     public string strToAllow = "";
+    // --- //
+    public GameObject hitVFX_Prefab_Ref;
+    // ----- //
 
 
     private void Start()
@@ -15,9 +18,16 @@ public class RegisterHitsTaken : MonoBehaviour
         print("TEST!");
     }
 
-    private void DoGettingHurtStuff()
+    private void DoGettingHurtStuff(Collider other)
     {
         print("took hit!");
+        Transform transform_PARENT = other.transform;
+        Transform transformToSet = other.transform;
+        
+        GameObject hitVFX_Clone = Instantiate(hitVFX_Prefab_Ref, transform_PARENT);
+        hitVFX_Clone.transform.position = transformToSet.position;
+        //hitVFX_Clone.GetComponent<ParticleSystem>().Play(); // already plays on Awake
+
         healthSystemRef.AddOrSubToHealth(-50); // need to change thing to be data-driven
     }
 
@@ -27,7 +37,7 @@ public class RegisterHitsTaken : MonoBehaviour
         print("OnTriggerEntered: " + other.tag + "| Allowed: " + strToAllow);
         if (other.CompareTag(strToAllow) == true)
         {
-            DoGettingHurtStuff();
+            DoGettingHurtStuff(other);
 
 
             //AttackSystem ref1 = other.gameObject.GetComponent<AttackSystem>();
