@@ -22,40 +22,20 @@ public class RegisterHitsTaken : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("OnTriggerEntered: " + other.tag + "| Allowed: " + strToAllow);
+        //print("OnTriggerEntered: " + other.tag + "| Allowed: " + strToAllow);
         if (other.CompareTag(strToAllow) == true)
         {
-            if (other.tag == "Enemy")
-            {
-                // then the enemy is touching plr
-                // so we want to check enemy's EnemyMoveEventCatcher
-                EnemyMoveEventCatcher ref1 = other.gameObject.GetComponent<EnemyMoveEventCatcher>();
-                if (ref1 == null) { print("error! can't find EnemyMoveEventCatcher"); }
-
-                if (ref1.isThisCharCurrAttacking == true)
-                {
-                    DoGettingHurtStuff();
-                }
-
-                ref1 = null;
+            AttackSystem ref1 = other.gameObject.GetComponent<AttackSystem>();
+            if (ref1 == null) { 
+                print("error! can't find AttackSystem");
+                return;
             }
-            else if (other.tag == "Player" || other.tag == "PlrAttackHitbox")
-            {
-                // then the plr is touching enemy
-                PlrAttackSystem ref1 = other.gameObject.GetComponent<PlrAttackSystem>();
-                if (ref1 == null) { print("error! can't find PlrAttackSystem"); }
 
-                if (ref1.isThisCharCurrAttacking == true)
-                {
-                    DoGettingHurtStuff();
-                }
-
-                ref1 = null;
-            }
-            else
+            if (ref1.isThisCharCurrAttacking == true)
             {
-                print("issue checking if thing touching is actually attacking!");
+                DoGettingHurtStuff();
             }
         }
     }
+
 }

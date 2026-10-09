@@ -1085,6 +1085,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553814202}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &579650904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 579650905}
+  m_Layer: 0
+  m_Name: ParticleGameObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &579650905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579650904}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.13554, y: 0.87962, z: 6.05366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &681920758
 GameObject:
   m_ObjectHideFlags: 3
@@ -2882,7 +2913,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4757836857439838590}
+      - m_Target: {fileID: 5006512736820427418}
         m_TargetAssemblyTypeName: MovementInput, Assembly-CSharp
         m_MethodName: UpdateInput_PlayerMovementVector2
         m_Mode: 0
@@ -2902,8 +2933,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5006512736820427412}
-        m_TargetAssemblyTypeName: PlrAttackSystem, Assembly-CSharp
+      - m_Target: {fileID: 5006512736820427418}
+        m_TargetAssemblyTypeName: MovementInput, Assembly-CSharp
         m_MethodName: InputFunc_Attack
         m_Mode: 0
         m_Arguments:
@@ -2942,7 +2973,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4757836857439838589}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CharacterSkinController, Assembly-CSharp
         m_MethodName: ChangeEyesOnInput_Normal
         m_Mode: 0
@@ -2958,7 +2989,7 @@ MonoBehaviour:
     m_ActionName: 'Player/ChangeFace_Normal[/Keyboard/1]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4757836857439838589}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CharacterSkinController, Assembly-CSharp
         m_MethodName: ChangeEyesOnInput_Happy
         m_Mode: 0
@@ -2974,7 +3005,7 @@ MonoBehaviour:
     m_ActionName: 'Player/ChangeFace_Happy[/Keyboard/2]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4757836857439838589}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CharacterSkinController, Assembly-CSharp
         m_MethodName: ChangeEyesOnInput_Angry
         m_Mode: 0
@@ -2990,7 +3021,7 @@ MonoBehaviour:
     m_ActionName: 'Player/ChangeFace_Angry[/Keyboard/3]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4757836857439838589}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CharacterSkinController, Assembly-CSharp
         m_MethodName: ChangeEyesOnInput_Dead
         m_Mode: 0
@@ -4538,29 +4569,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5006512736820427416}
+    - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5006512736820427418}
   m_SourcePrefab: {fileID: 100100000, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
---- !u!114 &4757836857439838589 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4757836856755875625, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
-  m_PrefabInstance: {fileID: 4757836857439838588}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757836857439838591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb6cae19ece4b848b976432ca8b3cfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4757836857439838590 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4757836856755875626, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
-  m_PrefabInstance: {fileID: 4757836857439838588}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757836857439838591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa9f165e2b4f1a4f9522501717c095d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4757836857439838591 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
@@ -4594,10 +4606,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlrAttackSystem
   animator: {fileID: 5006512736820427414}
-  movementInputScript_Ref: {fileID: 4757836857439838590}
+  movementInputScript_Ref: {fileID: 5006512736820427418}
   punchHitbox_R: {fileID: 2030743986}
   punchHitbox_L: {fileID: 553814202}
   hurrKickHitbox: {fileID: 1736418408}
+  isThisCharCurrAttacking: 0
+  tSinceLastPerfAttack: 0
+  tWindowToAllowNxtAttack: 1
+  lastAttackType: 0
+  lastAnimPhase: 0
 --- !u!95 &5006512736820427414 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7635726066119915157, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
@@ -4634,6 +4651,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RegisterHitsTaken
   healthSystemRef: {fileID: 5006512736820427415}
   strToAllow: Enemy
+--- !u!143 &5006512736820427417 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 4757836856755875627, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
+  m_PrefabInstance: {fileID: 4757836857439838588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5006512736820427418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757836857439838591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa9f165e2b4f1a4f9522501717c095d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementInput
+  Velocity: 0
+  InputX: 0
+  InputZ: 0
+  playerInput_MovementVector: {x: 0, y: 0}
+  attackSystem_Ref: {fileID: 5006512736820427412}
+  desiredMoveDirection: {x: 0, y: 0, z: 0}
+  blockRotationPlayer: 0
+  desiredRotationSpeed: 0.1
+  anim: {fileID: 5006512736820427414}
+  Speed: 0
+  allowPlayerRotation: 0.1
+  cam: {fileID: 963194227}
+  controller: {fileID: 5006512736820427417}
+  isGrounded: 0
+  HorizontalAnimSmoothTime: 0.2
+  VerticalAnimTime: 0.2
+  StartAnimTime: 0.3
+  StopAnimTime: 0.15
+  verticalVel: 0
 --- !u!1001 &8719123929563459793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4709,3 +4762,4 @@ SceneRoots:
   - {fileID: 704140098}
   - {fileID: 230338219}
   - {fileID: 1647635469}
+  - {fileID: 579650905}

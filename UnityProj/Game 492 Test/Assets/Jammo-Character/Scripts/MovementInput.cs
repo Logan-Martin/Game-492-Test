@@ -15,7 +15,10 @@ public class MovementInput : MonoBehaviour {
 
 	public float InputX;
 	public float InputZ;
-	public Vector2 playerInput_MovementVector; 
+	public Vector2 playerInput_MovementVector;
+    //
+    public AttackSystem attackSystem_Ref;
+    //
 
 
 	public Vector3 desiredMoveDirection;
@@ -157,4 +160,55 @@ public class MovementInput : MonoBehaviour {
             }
         }
 	}
+
+    public void InputFunc_Attack(InputAction.CallbackContext context) // event needs to be connected to EventSystem GameObj. -> PlayerInput
+    {
+        if (!context.performed) { return; } // so below then if it's perf code below will run
+        if (attackSystem_Ref.lastAnimPhase == CustomAnimationPhaseType.LeavingPhase || attackSystem_Ref.lastAnimPhase == CustomAnimationPhaseType.None) // not in anim commit window
+        {
+            // Check for Normal or Another Type of Attack Needed
+            //print(Time.time - tSinceLastPerfAttack);
+            if (!((Time.time - attackSystem_Ref.tSinceLastPerfAttack) < attackSystem_Ref.tWindowToAllowNxtAttack) || (attackSystem_Ref.lastAttackType == AttackType.None))
+            {
+                // if NOT [within time window to allow next attack] OR [lastAttack was set to None meaning a chain alr happened or time passed]
+                // -so do normal attack work
+                attackSystem_Ref.DoNormalAttack();
+                return;
+            }
+            // 0000 //
+
+            // Here on means non-normal attack:
+            if (attackSystem_Ref.lastAttackType == AttackType.None) // None -> Base
+            {
+                attackSystem_Ref.DoNormalAttack();
+            }
+            else if (attackSystem_Ref.lastAttackType == AttackType.Base) // Base -> 2nd
+            {
+                attackSystem_Ref.Do2ndAttack();
+            }
+            else if (attackSystem_Ref.lastAttackType == AttackType.Attack2) // 2nd -> 3rd
+            {
+                attackSystem_Ref.Do3rdAttack();
+            }
+            else if (attackSystem_Ref.lastAttackType == AttackType.Attack3)
+            {
+                // in middle of perf attack3
+                return;
+            }
+            else
+            {
+                print("Wrong string given!");
+                // wrong str given
+            }
+        }
+
+
+        //context.phase = InputActionPhase.Performed; // Started, Waiting, Performed, Canceled, Disabled
+        //context.duration = 0;
+        //context.performed // shorthand for phase?
+        //context.startTime;
+        //context.time;
+        //context.ReadValue();
+        //context.started // shorthand for phase?
+    }
 }

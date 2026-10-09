@@ -1331,9 +1331,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 167.16579
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4757836856755875626, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
-    - {fileID: 4757836856755875625, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 539745478100655087, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
@@ -1354,7 +1352,7 @@ PrefabInstance:
       addedObject: {fileID: 1819046060954435615}
     - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7434136182694771028}
+      addedObject: {fileID: 1010567412207197933}
   m_SourcePrefab: {fileID: 100100000, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
 --- !u!4 &797978785646134472 stripped
 Transform:
@@ -1385,10 +1383,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   maxHealth: 100
   playerRef: {fileID: 3133432311307334072}
-  animator: {fileID: 0}
+  animator: {fileID: 8335435087834656465}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.15
---- !u!114 &7434136182694771028
+--- !u!114 &1010567412207197933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1397,13 +1395,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3133432311307334072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeca7f5dd6ab17f45a6c0f71d8fe7945, type: 3}
+  m_Script: {fileID: 11500000, guid: a738498cb58ae794e8d2cf1e057c90c8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMoveEventCatcher
+  m_EditorClassIdentifier: Assembly-CSharp::PlrAttackSystem
   animator: {fileID: 8335435087834656465}
+  movementInputScript_Ref: {fileID: 0}
   punchHitbox_R: {fileID: 6177028687303758189}
   punchHitbox_L: {fileID: 7209991078366763753}
   hurrKickHitbox: {fileID: 4964023815885403732}
+  isThisCharCurrAttacking: 0
 --- !u!4 &7824333964510664467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8561193508396601175, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
