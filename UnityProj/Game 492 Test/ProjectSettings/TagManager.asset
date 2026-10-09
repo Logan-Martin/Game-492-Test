@@ -7,6 +7,9 @@ TagManager:
   - PlayerEyes
   - Enemy
   - PlrAttackHitbox
+  - PlrHurtbox
+  - EnemyHurtbox
+  - EnemyHitbox
   layers:
   - Default
   - TransparentFX
