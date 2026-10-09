@@ -4668,14 +4668,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa9f165e2b4f1a4f9522501717c095d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementInput
-  Velocity: 0
+  Velocity: 10
   InputX: 0
   InputZ: 0
   playerInput_MovementVector: {x: 0, y: 0}
   attackSystem_Ref: {fileID: 5006512736820427412}
   desiredMoveDirection: {x: 0, y: 0, z: 0}
   blockRotationPlayer: 0
-  desiredRotationSpeed: 0.1
+  desiredRotationSpeed: 0.3
   anim: {fileID: 5006512736820427414}
   Speed: 0
   allowPlayerRotation: 0.1
@@ -4686,7 +4686,7 @@ MonoBehaviour:
   VerticalAnimTime: 0.2
   StartAnimTime: 0.3
   StopAnimTime: 0.15
-  verticalVel: 0
+  verticalVel: -0.5
 --- !u!1001 &8719123929563459793
 PrefabInstance:
   m_ObjectHideFlags: 0
