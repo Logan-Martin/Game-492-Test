@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6739676383034985196}
   m_Layer: 0
   m_Name: hurrKickHitbox
-  m_TagString: Enemy
+  m_TagString: EnemyHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 536375483243292437}
   m_Layer: 0
   m_Name: hitbox
-  m_TagString: Enemy
+  m_TagString: EnemyHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 6433548186048479841}
   m_Layer: 0
   m_Name: hitbox
-  m_TagString: Enemy
+  m_TagString: EnemyHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,9 +349,10 @@ GameObject:
   - component: {fileID: 8343109169609234331}
   - component: {fileID: 3033053827729286809}
   - component: {fileID: 6250385683680086994}
+  - component: {fileID: 4055716546435053582}
   m_Layer: 0
   m_Name: mainHitbox
-  m_TagString: Enemy
+  m_TagString: EnemyHurtbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,6 +464,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RegisterHitsTaken
   healthSystemRef: {fileID: 1819046060954435615}
   strToAllow: PlrAttackHitbox
+--- !u!54 &4055716546435053582
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7719730858400050421}
+  serializedVersion: 5
+  m_Mass: 0.0000001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1899083536366999620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1179,6 +1207,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 60c2f0e0aaa8f8d4e9d23d7e3768653b, type: 2}
+    - target: {fileID: 7635726066119915157, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
     - target: {fileID: 7702342598273183683, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 23.216063
@@ -1404,6 +1436,10 @@ MonoBehaviour:
   punchHitbox_L: {fileID: 7209991078366763753}
   hurrKickHitbox: {fileID: 4964023815885403732}
   isThisCharCurrAttacking: 0
+  tSinceLastPerfAttack: 0
+  tWindowToAllowNxtAttack: 1
+  lastAttackType: 0
+  lastAnimPhase: 0
 --- !u!4 &7824333964510664467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8561193508396601175, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}

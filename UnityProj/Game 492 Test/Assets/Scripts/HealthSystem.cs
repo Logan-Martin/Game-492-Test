@@ -61,7 +61,7 @@ public class HealthSystem : MonoBehaviour
         {
             tempCheck = maxHealth;
         }
-        if (tempCheck < 0)
+        if (tempCheck <= 0)
         {
             tempCheck = 0;
             animator.SetTrigger("PlayCharDeathAnim");

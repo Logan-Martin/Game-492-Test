@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class RegisterHitsTaken : MonoBehaviour
@@ -11,30 +12,34 @@ public class RegisterHitsTaken : MonoBehaviour
     private void Start()
     {
         currentTag = this.gameObject.tag;
-        //healthSystemRef = GetComponent<HealthSystem>();
+        print("TEST!");
     }
 
     private void DoGettingHurtStuff()
     {
         print("took hit!");
-        healthSystemRef.AddOrSubToHealth(-5); // need to change thing to be data-driven
+        healthSystemRef.AddOrSubToHealth(-50); // need to change thing to be data-driven
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //print("OnTriggerEntered: " + other.tag + "| Allowed: " + strToAllow);
+        //print(other);
+        print("OnTriggerEntered: " + other.tag + "| Allowed: " + strToAllow);
         if (other.CompareTag(strToAllow) == true)
         {
-            AttackSystem ref1 = other.gameObject.GetComponent<AttackSystem>();
-            if (ref1 == null) { 
-                print("error! can't find AttackSystem");
-                return;
-            }
+            DoGettingHurtStuff();
 
-            if (ref1.isThisCharCurrAttacking == true)
-            {
-                DoGettingHurtStuff();
-            }
+
+            //AttackSystem ref1 = other.gameObject.GetComponent<AttackSystem>();
+            //if (ref1 == null) { 
+            //    print("error! can't find AttackSystem");
+            //    return;
+            //}
+
+            //if (ref1.isThisCharCurrAttacking == true)
+            //{
+            //DoGettingHurtStuff();
+            //}
         }
     }
 

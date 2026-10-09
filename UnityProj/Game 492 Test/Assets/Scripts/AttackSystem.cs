@@ -55,7 +55,7 @@ public class AttackSystem : MonoBehaviour
 
         isThisCharCurrAttacking = true;
 
-        print(str);
+        //print(str);
         if (str == "" || str == null)
         {
             print("Action anim event fired but no str data was given!");
@@ -86,7 +86,7 @@ public class AttackSystem : MonoBehaviour
     public void AttackAnim_Leaving()
     {
         lastAnimPhase = CustomAnimationPhaseType.LeavingPhase;
-        print(movementInputScript_Ref);
+        //print(movementInputScript_Ref);
         if (movementInputScript_Ref != null)
         {
             movementInputScript_Ref.TogglePlayerMovement(true);
