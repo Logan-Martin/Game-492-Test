@@ -104,6 +104,7 @@ public class MovementInput : MonoBehaviour {
         }
         else
         {
+            Debug.Log("Using forced direction: " + ForcedMovementDirection);
             desiredMoveDirection = ForcedMovementDirection;
         }
 
@@ -116,7 +117,7 @@ public class MovementInput : MonoBehaviour {
         if(ForcedForwardSpeed != 0.0f)
         {
             currentVelocity = ForcedForwardSpeed;
-            if(desiredMoveDirection.magnitude > 0.1f)
+            if(desiredMoveDirection.magnitude < 0.1f)
             {
                 desiredMoveDirection = transform.forward;
             }
