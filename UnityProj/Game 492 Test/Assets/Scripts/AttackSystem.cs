@@ -26,6 +26,9 @@ public class AttackSystem : MonoBehaviour
     public GameObject punchHitbox_R;
     public GameObject punchHitbox_L;
     public GameObject hurrKickHitbox;
+    // ---- //
+    public AttackTargetSystem attackTargetSystem_ScriptRef;
+    public ApplyRootTransformTowardPoint ApplyRootTransformTowardPoint_ScriptRef;
 
     public bool isThisCharCurrAttacking = false;
 
@@ -47,6 +50,12 @@ public class AttackSystem : MonoBehaviour
         if (movementInputScript_Ref != null)
         {
             movementInputScript_Ref.TogglePlayerMovement(false);
+
+            // get target
+            GameObject targ = attackTargetSystem_ScriptRef.GetClosestAliveTarget();
+            if (targ == null) { return; }
+            // then move toward ig
+            ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(targ.transform.localPosition);
         }
     }
     public void AttackAnim_Action(string str)
