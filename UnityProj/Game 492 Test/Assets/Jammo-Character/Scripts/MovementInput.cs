@@ -19,9 +19,14 @@ public class MovementInput : MonoBehaviour {
     //
     public AttackSystem attackSystem_Ref;
     //
+    public bool needToStepAppliedRootMotion = false;
+    public Vector3 appliedRootMotion_EndGoal;
+    public float distToStopAppliedRootMotion = 3f;
+    public float stTime_AppRtMotion = 0;
+    private float timePassedToAutoStopAppRtMotion = 2f; // in secs
 
 
-	public Vector3 desiredMoveDirection;
+    public Vector3 desiredMoveDirection;
 	public bool blockRotationPlayer;
     private bool allowPlayerMovement = true;
 	public float desiredRotationSpeed = 0.1f;
@@ -62,7 +67,7 @@ public class MovementInput : MonoBehaviour {
     void Start () {
 		anim = this.GetComponent<Animator> ();
 		cam = Camera.main;
-		controller = this.GetComponent<CharacterController> ();
+		controller = this.GetComponent<CharacterController>();
 	}
 	
     public void UpdateInput_PlayerMovementVector2(InputAction.CallbackContext context)
@@ -70,10 +75,41 @@ public class MovementInput : MonoBehaviour {
         playerInput_MovementVector = context.ReadValue<Vector2>(); // read from context as a Vector2, as is the type
     }
 
+    private void CheckForAndStepAppliedRootMotion()
+    {
+        if (needToStepAppliedRootMotion == true)
+        {
+            // check if close enough to end goal to get out of state
+            float temp = (appliedRootMotion_EndGoal - this.transform.localPosition).magnitude;
+            if (temp <= distToStopAppliedRootMotion)
+            {
+                needToStepAppliedRootMotion = false;
+                blockRotationPlayer = false;
+                return;
+            }
+            
+            // timedOut better check than above
+            float tempTime = (Time.time - stTime_AppRtMotion);
+            if (tempTime >= timePassedToAutoStopAppRtMotion)
+            {
+                needToStepAppliedRootMotion = false;
+                blockRotationPlayer = false;
+                return;
+            }
 
-	// Update is called once per frame
-	void Update () {
-		InputMagnitude ();
+            controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
+        }
+    }
+
+
+    // Update is called once per frame
+    void Update () {
+        //print(allowPlayerMovement);
+        //print(needToStepAppliedRootMotion);
+		InputMagnitude(); // if plrMovement off, this just takes the inputs and doesn't update movement w/ Move()
+
+        // step for applying Attack Root Transform motion
+        CheckForAndStepAppliedRootMotion();
 
         isGrounded = controller.isGrounded;
         if (isGrounded)
@@ -84,6 +120,7 @@ public class MovementInput : MonoBehaviour {
         {
             verticalVel -= 1;
         }
+        // below is ater plr movement already happens
         moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
         controller.Move(moveVector);
 
@@ -108,9 +145,12 @@ public class MovementInput : MonoBehaviour {
 		forward.Normalize ();
 		right.Normalize ();
 
-		desiredMoveDirection = forward * InputZ + right * InputX;
+        if (needToStepAppliedRootMotion == false)
+        {
+            desiredMoveDirection = forward * InputZ + right * InputX;
+        }
 
-		if (blockRotationPlayer == false) {
+        if (blockRotationPlayer == false) {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
             controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
 		}
