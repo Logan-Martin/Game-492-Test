@@ -9,6 +9,13 @@ public class JammoAttackingState : StateMachineBehaviour
         if (movementInput != null)
         {
             movementInput.EnableDirectionChange = false;
+
+            CombatCharacter combatCharacter = animator.gameObject.GetComponent<CombatCharacter>();
+            if (combatCharacter != null)
+            {
+                Vector3 targetDirection = combatCharacter.GetPreferredTargetDirection();
+                movementInput.ForcedMovementDirection = targetDirection;
+            }
         }
         //Debug.Log("Attacking ENTER");
     }

@@ -3,7 +3,7 @@ using static Hitbox;
 
 public class Hurtbox : MonoBehaviour
 {
-    public CombatTeam team;
+    public CombatTeam team;         //TODO: This replicates data in CombatCharacter. Refactor.
     public Animator animator;
 
 

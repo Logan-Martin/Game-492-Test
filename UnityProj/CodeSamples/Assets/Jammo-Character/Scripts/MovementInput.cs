@@ -15,6 +15,7 @@ public class MovementInput : MonoBehaviour {
     public bool EnableDirectionChange;
 
     public float ForcedForwardSpeed;
+    public Vector3 ForcedMovementDirection;
 
     public float Velocity;
     [Space]
@@ -101,6 +102,10 @@ public class MovementInput : MonoBehaviour {
         {
             desiredMoveDirection = forward * InputZ + right * InputX;
         }
+        else
+        {
+            desiredMoveDirection = ForcedMovementDirection;
+        }
 
         float currentVelocity = 0.0f;
         if(EnableVelocity)
@@ -111,6 +116,10 @@ public class MovementInput : MonoBehaviour {
         if(ForcedForwardSpeed != 0.0f)
         {
             currentVelocity = ForcedForwardSpeed;
+            if(desiredMoveDirection.magnitude > 0.1f)
+            {
+                desiredMoveDirection = transform.forward;
+            }
         }
 
 		if (blockRotationPlayer == false) {
@@ -158,7 +167,7 @@ public class MovementInput : MonoBehaviour {
 
         //Physically move player
 
-		if (Speed > allowPlayerRotation) {
+		if (Speed > allowPlayerRotation || ForcedForwardSpeed != 0.0f) {
 			anim.SetFloat ("Blend", Speed, StartAnimTime, Time.deltaTime);
 			PlayerMoveAndRotation ();
 		} else if (Speed < allowPlayerRotation) {

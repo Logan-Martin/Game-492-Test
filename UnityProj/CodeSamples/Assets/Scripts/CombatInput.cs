@@ -25,7 +25,6 @@ public class CombatInput : MonoBehaviour
             }
         }
     }
-        
 
     void SetForcedForwardSpeed(float speed)
     {
