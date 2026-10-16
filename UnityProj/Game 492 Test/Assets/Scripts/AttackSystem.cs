@@ -105,6 +105,10 @@ public class AttackSystem : MonoBehaviour
         punchHitbox_L.SetActive(false);
         punchHitbox_R.SetActive(false);
         hurrKickHitbox.SetActive(false);
+
+        // !!!!!
+        movementInputScript_Ref.needToStepAppliedRootMotion = false;
+        movementInputScript_Ref.blockRotationPlayer = false;
         // ---- //
         //lastAttackType = AttackType.None; //? no cause logic on combo w/ timing
     }

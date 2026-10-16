@@ -18,7 +18,6 @@ public class ApplyRootTransformTowardPoint : MonoBehaviour
         {
             //movementInput_ScriptRef.TogglePlayerMovement(false); // alr done by attack anim stuff but still prob have to override that
             movementInput_ScriptRef.blockRotationPlayer = true;
-            movementInput_ScriptRef.LookAt(posToGoTo); // face targ
             movementInput_ScriptRef.needToStepAppliedRootMotion = true;
             
             // Movement work:
@@ -26,7 +25,7 @@ public class ApplyRootTransformTowardPoint : MonoBehaviour
             // setting here ^^^^^ so its one value that doesn't change each frame
 
             // clean up done in MovementInput.cs when close enough or timedOut
-            movementInput_ScriptRef.stTime_AppRtMotion = Time.time;
+            // movementInput_ScriptRef.stTime_AppRtMotion = Time.time;
         }
         else
         {
