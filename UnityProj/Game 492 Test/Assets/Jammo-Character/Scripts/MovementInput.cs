@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
@@ -79,23 +80,26 @@ public class MovementInput : MonoBehaviour {
     {
         if (needToStepAppliedRootMotion == true)
         {
+            transform.rotation = Quaternion.LookRotation(desiredMoveDirection); // snap
+            //LookAt(desiredMoveDirection); // face targ too slow
+
             // check if close enough to end goal to get out of state
-            float temp = (appliedRootMotion_EndGoal - this.transform.localPosition).magnitude;
-            if (temp <= distToStopAppliedRootMotion)
-            {
-                needToStepAppliedRootMotion = false;
-                blockRotationPlayer = false;
-                return;
-            }
+            //float temp = (appliedRootMotion_EndGoal - this.transform.localPosition).magnitude;
+            //if (temp <= distToStopAppliedRootMotion)
+            //{
+            //    needToStepAppliedRootMotion = false;
+            //    blockRotationPlayer = false;
+            //    return;
+            //}
             
             // timedOut better check than above
-            float tempTime = (Time.time - stTime_AppRtMotion);
-            if (tempTime >= timePassedToAutoStopAppRtMotion)
-            {
-                needToStepAppliedRootMotion = false;
-                blockRotationPlayer = false;
-                return;
-            }
+            //float tempTime = (Time.time - stTime_AppRtMotion);
+            //if (tempTime >= timePassedToAutoStopAppRtMotion)
+            //{
+            //    needToStepAppliedRootMotion = false;
+            //    blockRotationPlayer = false;
+            //    return;
+            //}
 
             controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
         }
