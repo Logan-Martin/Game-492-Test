@@ -13,15 +13,17 @@ public class ApplyRootTransformTowardPoint : MonoBehaviour
         // faces enemy targ, plays a sliding animation based on dist to travel w/ max slide 
         // when in this phase, plr can cancel w/ jump, but takes away joystick movement while sliding
 
-        float temp = (posToGoTo - this.transform.localPosition).sqrMagnitude;
+        float temp = (posToGoTo - this.transform.position).sqrMagnitude;
         if (temp < maxDistToPush) // allow
         {
             //movementInput_ScriptRef.TogglePlayerMovement(false); // alr done by attack anim stuff but still prob have to override that
             movementInput_ScriptRef.blockRotationPlayer = true;
             movementInput_ScriptRef.needToStepAppliedRootMotion = true;
-            
+
             // Movement work:
-            movementInput_ScriptRef.desiredMoveDirection = (posToGoTo - this.transform.localPosition).normalized;
+            Vector3 vectorToEnemy = (posToGoTo - this.transform.position);
+            movementInput_ScriptRef.desiredMoveDirection = vectorToEnemy.normalized;
+            Debug.DrawLine(this.transform.position, this.transform.position + vectorToEnemy, Color.red);
             // setting here ^^^^^ so its one value that doesn't change each frame
 
             // clean up done in MovementInput.cs when close enough or timedOut

@@ -24,7 +24,7 @@ public class MovementInput : MonoBehaviour {
     public Vector3 appliedRootMotion_EndGoal;
     public float distToStopAppliedRootMotion = 3f;
     public float stTime_AppRtMotion = 0;
-    private float timePassedToAutoStopAppRtMotion = 2f; // in secs
+    //private float timePassedToAutoStopAppRtMotion = 2f; // in secs
 
 
     public Vector3 desiredMoveDirection;

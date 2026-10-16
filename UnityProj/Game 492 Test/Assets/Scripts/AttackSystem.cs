@@ -55,7 +55,7 @@ public class AttackSystem : MonoBehaviour
             GameObject targ = attackTargetSystem_ScriptRef.GetClosestAliveTarget();
             if (targ == null) { return; }
             // then move toward ig
-            ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(targ.transform.localPosition);
+            ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(targ.transform.position);
         }
     }
     public void AttackAnim_Action(string str)
@@ -91,6 +91,10 @@ public class AttackSystem : MonoBehaviour
             print("Action anim event fired but not in cases to catch. String typed wrong?");
         }
         // can attack / do dmg to another now
+
+        // !!!!!
+        movementInputScript_Ref.needToStepAppliedRootMotion = false;
+        movementInputScript_Ref.blockRotationPlayer = false;
     }
     public void AttackAnim_Leaving()
     {
@@ -106,9 +110,6 @@ public class AttackSystem : MonoBehaviour
         punchHitbox_R.SetActive(false);
         hurrKickHitbox.SetActive(false);
 
-        // !!!!!
-        movementInputScript_Ref.needToStepAppliedRootMotion = false;
-        movementInputScript_Ref.blockRotationPlayer = false;
         // ---- //
         //lastAttackType = AttackType.None; //? no cause logic on combo w/ timing
     }
