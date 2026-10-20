@@ -56,6 +56,7 @@ public class MovementInput : MonoBehaviour {
 
     public void TogglePlayerMovement(bool toggle)
     {
+        print("Toggling Plr Movement!: " + toggle);
         allowPlayerMovement = toggle;
     }
 
