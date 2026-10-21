@@ -16,14 +16,23 @@ public class ApplyRootTransformTowardPoint : MonoBehaviour
         float temp = (posToGoTo - this.transform.position).sqrMagnitude;
         if (temp < maxDistToPush) // allow
         {
-            //movementInput_ScriptRef.TogglePlayerMovement(false); // alr done by attack anim stuff but still prob have to override that
             movementInput_ScriptRef.blockRotationPlayer = true;
-            movementInput_ScriptRef.needToStepAppliedRootMotion = true;
+            movementInput_ScriptRef.needToStepAppliedRootMotion = true; // starts in Update()
 
             // Movement work:
             Vector3 vectorToEnemy = (posToGoTo - this.transform.position);
-            movementInput_ScriptRef.desiredMoveDirection = vectorToEnemy.normalized;
-            Debug.DrawLine(this.transform.position, this.transform.position + vectorToEnemy, Color.red);
+            if (vectorToEnemy == Vector3.zero)
+            {
+                // this means no targ basically
+                movementInput_ScriptRef.SPEED_AppRtMotion = 5f;
+                //movementInput_ScriptRef.desiredMoveDirection = posToGoTo.normalized;
+            }
+            else
+            {
+                movementInput_ScriptRef.SPEED_AppRtMotion = 10f;
+                movementInput_ScriptRef.desiredMoveDirection = vectorToEnemy.normalized;
+            }
+            //Debug.DrawLine(this.transform.position, this.transform.position + vectorToEnemy, Color.red);
             // setting here ^^^^^ so its one value that doesn't change each frame
 
             // clean up done in MovementInput.cs when close enough or timedOut

@@ -21,8 +21,8 @@ public class MovementInput : MonoBehaviour {
     public AttackSystem attackSystem_Ref;
     //
     public bool needToStepAppliedRootMotion = false;
+    public float SPEED_AppRtMotion = 10f;
     public Vector3 appliedRootMotion_EndGoal;
-    public float distToStopAppliedRootMotion = 3f;
     public float stTime_AppRtMotion = 0;
     //private float timePassedToAutoStopAppRtMotion = 2f; // in secs
 
@@ -82,27 +82,8 @@ public class MovementInput : MonoBehaviour {
         if (needToStepAppliedRootMotion == true)
         {
             transform.rotation = Quaternion.LookRotation(desiredMoveDirection); // snap
-            //LookAt(desiredMoveDirection); // face targ too slow
-
-            // check if close enough to end goal to get out of state
-            //float temp = (appliedRootMotion_EndGoal - this.transform.localPosition).magnitude;
-            //if (temp <= distToStopAppliedRootMotion)
-            //{
-            //    needToStepAppliedRootMotion = false;
-            //    blockRotationPlayer = false;
-            //    return;
-            //}
             
-            // timedOut better check than above
-            //float tempTime = (Time.time - stTime_AppRtMotion);
-            //if (tempTime >= timePassedToAutoStopAppRtMotion)
-            //{
-            //    needToStepAppliedRootMotion = false;
-            //    blockRotationPlayer = false;
-            //    return;
-            //}
-
-            controller.Move(desiredMoveDirection * Time.deltaTime * Velocity);
+            controller.Move(desiredMoveDirection * Time.deltaTime * SPEED_AppRtMotion);
         }
     }
 
