@@ -1101,7 +1101,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 246aa4d481307be459b67df68f2b12a3, type: 2}
+  - {fileID: 2100000, guid: c5710a394e4d0854db1d4b2aa3c6b795, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3438,7 +3438,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 246aa4d481307be459b67df68f2b12a3, type: 2}
+  - {fileID: 2100000, guid: c5710a394e4d0854db1d4b2aa3c6b795, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3577,7 +3577,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 246aa4d481307be459b67df68f2b12a3, type: 2}
+  - {fileID: 2100000, guid: c5710a394e4d0854db1d4b2aa3c6b795, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3801,7 +3801,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 246aa4d481307be459b67df68f2b12a3, type: 2}
+  - {fileID: 2100000, guid: c5710a394e4d0854db1d4b2aa3c6b795, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4779,6 +4779,7 @@ MonoBehaviour:
   hurrKickHitbox: {fileID: 1736418408}
   attackTargetSystem_ScriptRef: {fileID: 5006512736820427419}
   ApplyRootTransformTowardPoint_ScriptRef: {fileID: 5006512736820427420}
+  NonTarg_AppliedRtMotionDist: 0
   isThisCharCurrAttacking: 0
   tSinceLastPerfAttack: 0
   tWindowToAllowNxtAttack: 1
@@ -4829,8 +4830,8 @@ MonoBehaviour:
   playerInput_MovementVector: {x: 0, y: 0}
   attackSystem_Ref: {fileID: 5006512736820427412}
   needToStepAppliedRootMotion: 0
+  SPEED_AppRtMotion: 10
   appliedRootMotion_EndGoal: {x: 0, y: 0, z: 0}
-  distToStopAppliedRootMotion: 3
   stTime_AppRtMotion: 0
   desiredMoveDirection: {x: 0, y: 0, z: 0}
   blockRotationPlayer: 0

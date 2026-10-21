@@ -20,15 +20,16 @@ public class RegisterHitsTaken : MonoBehaviour
 
     private void DoGettingHurtStuff(Collider other)
     {
-        print("took hit!");
-        Transform transform_PARENT = other.transform;
-        Transform transformToSet = other.transform;
-        
-        GameObject hitVFX_Clone = Instantiate(hitVFX_Prefab_Ref, transform_PARENT);
-        hitVFX_Clone.transform.position = transformToSet.position;
-        //hitVFX_Clone.GetComponent<ParticleSystem>().Play(); // already plays on Awake
+        if (healthSystemRef.GetHealth() > 0) // if alive check
+        {
+            print("took hit!");
+            Transform transform_PARENT = other.gameObject.transform;
+            Transform transformToSet = other.gameObject.transform;
 
-        healthSystemRef.AddOrSubToHealth(-50); // need to change thing to be data-driven
+            GameObject hitVFX_Clone = Instantiate(hitVFX_Prefab_Ref, transform_PARENT.position, Quaternion.identity);
+
+            healthSystemRef.AddOrSubToHealth(-25); // need to change thing to be data-driven
+        }
     }
 
     private void OnTriggerEnter(Collider other)

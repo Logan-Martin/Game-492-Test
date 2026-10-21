@@ -29,6 +29,7 @@ public class AttackSystem : MonoBehaviour
     // ---- //
     public AttackTargetSystem attackTargetSystem_ScriptRef;
     public ApplyRootTransformTowardPoint ApplyRootTransformTowardPoint_ScriptRef;
+    public float NonTarg_AppliedRtMotionDist = 5f;
 
     public bool isThisCharCurrAttacking = false;
 
@@ -53,9 +54,17 @@ public class AttackSystem : MonoBehaviour
 
             // get target
             GameObject targ = attackTargetSystem_ScriptRef.GetClosestAliveTarget();
-            if (targ == null) { return; }
-            // then move toward ig
-            ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(targ.transform.position);
+            if (targ == null) {
+                // then move in general forward
+                Vector3 offset = this.gameObject.transform.forward * NonTarg_AppliedRtMotionDist;
+                Vector3 computedEndPt = this.gameObject.transform.position + (offset);
+                ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(computedEndPt);
+            }
+            else
+            {
+                // then move toward target player
+                ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(targ.transform.position);
+            }
         }
     }
     public void AttackAnim_Action(string str)

@@ -18,7 +18,7 @@ public class AttackTargetSystem : MonoBehaviour
             if (!targ.gameObject.CompareTag(strToLookFor)) { continue; }
 
             float healthCheck = targ.gameObject.GetComponent<HealthSystem>().GetHealth();
-            print("Health check: " + healthCheck);
+            //print("Health check: " + healthCheck);
             if (healthCheck == 0) {
                 // could maybe do a sub list of dead enemy, then after the foreach loop auto remove dead ones
                 // instead of just relying on the OnTriggerExit to remove them generally
