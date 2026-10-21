@@ -37,7 +37,7 @@ ModelImporter:
       firstFrame: 0
       lastFrame: 26
       wrapMode: 0
-      orientationOffsetY: -45
+      orientationOffsetY: -42.59
       level: 0
       cycleOffset: 0
       loop: 0
@@ -55,21 +55,21 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: 0.053863622
         functionName: AttackAnim_Starting
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.3646643
+      - time: 0.4185279
         functionName: AttackAnim_Action
         data: RightHand
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5729287
+      - time: 0.6267924
         functionName: AttackAnim_Leaving
         data: 
         objectReferenceParameter: {instanceID: 0}

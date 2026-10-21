@@ -28,7 +28,7 @@ public class RegisterHitsTaken : MonoBehaviour
         hitVFX_Clone.transform.position = transformToSet.position;
         //hitVFX_Clone.GetComponent<ParticleSystem>().Play(); // already plays on Awake
 
-        healthSystemRef.AddOrSubToHealth(-50); // need to change thing to be data-driven
+        healthSystemRef.AddOrSubToHealth(-25); // need to change thing to be data-driven
     }
 
     private void OnTriggerEnter(Collider other)

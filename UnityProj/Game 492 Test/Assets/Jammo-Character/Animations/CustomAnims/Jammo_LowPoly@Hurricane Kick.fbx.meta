@@ -62,7 +62,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.08048781
+      - time: 0.095121965
         functionName: AttackAnim_Action
         data: TornadoKick
         objectReferenceParameter: {instanceID: 0}
