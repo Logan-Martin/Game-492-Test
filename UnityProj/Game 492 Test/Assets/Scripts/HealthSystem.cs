@@ -56,20 +56,23 @@ public class HealthSystem : MonoBehaviour
 
     public void AddOrSubToHealth(float amount)
     {
+        if (health <= 0) { return; } // if health alr <= 0, they dead
+
         float tempCheck = health + amount;
         if (tempCheck > maxHealth)
         {
             tempCheck = maxHealth;
         }
-        if (tempCheck <= 0)
+        if (tempCheck <= 0) // this check for if hitting would kill char entirely
         {
             tempCheck = 0;
             animator.SetTrigger("PlayCharDeathAnim");
-            ResetPlayer();
+            health = tempCheck;
             return;
         }
         health = tempCheck;
-        print("took damage!");
+
+        //print("took damage!");
         animator.SetTrigger("PlayCharTakingPunchAnim");
         //healthTextComponent.text = "Health: " + health + " / " + maxHealth;
     }
