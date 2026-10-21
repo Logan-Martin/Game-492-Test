@@ -696,7 +696,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254666264749748759}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2258,6 +2258,7 @@ MonoBehaviour:
   EnableVelocity: 0
   EnableDirectionChange: 0
   ForcedForwardSpeed: 0
+  ForcedMovementDirection: {x: 0, y: 0, z: 0}
   Velocity: 10
   InputX: 0
   InputZ: 0
@@ -2299,6 +2300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560518a6f74902540a63ddd551b3a717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatCharacter
+  team: 0
+  targetEnemy: {fileID: 0}
+  maxHP: 1000
 --- !u!1 &3921334144448749991
 GameObject:
   m_ObjectHideFlags: 0
@@ -4465,7 +4469,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6097614614063837215}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4544,6 +4548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
   team: 0
   animator: {fileID: 7635726066119915157}
+  combatCharacter: {fileID: 368816685097945305}
 --- !u!54 &8381518503408622422
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5360,7 +5365,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7257931362312446248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

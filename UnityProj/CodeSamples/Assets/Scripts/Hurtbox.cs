@@ -5,7 +5,7 @@ public class Hurtbox : MonoBehaviour
 {
     public CombatTeam team;         //TODO: This replicates data in CombatCharacter. Refactor.
     public Animator animator;
-
+    public CombatCharacter combatCharacter;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,18 +16,26 @@ public class Hurtbox : MonoBehaviour
             {
                 if(incomingHitbox.hitsRemaining > 0)
                 {
-                    --incomingHitbox.hitsRemaining;
-
-                    if (incomingHitbox.hitEffectPrefab != null)
+                    if (combatCharacter != null && !combatCharacter.IsDead())
                     {
-                        GameObject hitEffect = GameObject.Instantiate(incomingHitbox.hitEffectPrefab, other.gameObject.transform.position, Quaternion.identity);
-                        Destroy(hitEffect, 1.0f);
-                    }
+                        --incomingHitbox.hitsRemaining;
 
-                    Debug.Log("I (" + gameObject.name + ") was hit by " + other.gameObject.name);
-                    if (animator != null)
-                    {
-                        animator.SetTrigger("takeHit");
+                        if (incomingHitbox.hitEffectPrefab != null)
+                        {
+                            GameObject hitEffect = GameObject.Instantiate(incomingHitbox.hitEffectPrefab, other.gameObject.transform.position, Quaternion.identity);
+                            Destroy(hitEffect, 1.0f);
+                        }
+
+                        combatCharacter.InflictDamage(250);
+
+                        if (animator != null)
+                        {
+                            animator.SetTrigger(
+                                combatCharacter.IsDying() ?
+                                "dead" :
+                                "takeHit"
+                                );
+                        }
                     }
                 }
             }
