@@ -1386,6 +1386,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1010567412207197933}
+    - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4674506573289431724}
   m_SourcePrefab: {fileID: 100100000, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
 --- !u!4 &797978785646134472 stripped
 Transform:
@@ -1444,6 +1447,18 @@ MonoBehaviour:
   tWindowToAllowNxtAttack: 1
   lastAttackType: 0
   lastAnimPhase: 0
+--- !u!114 &4674506573289431724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3133432311307334072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba99e2b3f9abab141a5e5594b68cf86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStateSystem
 --- !u!4 &7824333964510664467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8561193508396601175, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
