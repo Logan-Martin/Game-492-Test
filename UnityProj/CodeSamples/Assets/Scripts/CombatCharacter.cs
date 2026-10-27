@@ -14,8 +14,7 @@ public class CombatCharacter : MonoBehaviour
     public CombatTeam team;
 
 
-    //TEMP: Public so we can see it in inspector
-    public CombatCharacter targetEnemy;
+    CombatCharacter targetEnemy;
 
     LifeState lifeState = LifeState.None;
     int currentHP;
@@ -23,9 +22,12 @@ public class CombatCharacter : MonoBehaviour
 
     float secondsDying;
 
+    Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         SetLifeState(LifeState.Alive);
     }
 
@@ -86,12 +88,32 @@ public class CombatCharacter : MonoBehaviour
         return Vector3.zero;
     }
 
+    public float GetPreferredTargetDistance()
+    {
+        if (targetEnemy != null)
+        {
+            Vector3 vectorToEnemy = targetEnemy.transform.position - transform.position;
+            return vectorToEnemy.magnitude;
+        }
+
+        return 0.0f;
+    }
+
     public void InflictDamage(int damageAmount)
     {
         currentHP -= damageAmount;
         if(currentHP <= 0)
         {
             SetLifeState(LifeState.Dying);
+        }
+
+        if (animator != null)
+        {
+            animator.SetTrigger(
+                IsDying() ?
+                "dead" :
+                "takeHit"
+                );
         }
     }
 
@@ -103,6 +125,16 @@ public class CombatCharacter : MonoBehaviour
     public bool IsDead()
     {
         return lifeState == LifeState.Dead;
+    }
+
+    public bool CanBeHit()
+    {
+        EnemyStateController enemyStateController = GetComponent<EnemyStateController>();
+        if (enemyStateController != null)
+        {
+            return enemyStateController.CanBeHit() && !IsDead();
+        }
+        return !IsDead();
     }
 
     void SetLifeState(LifeState inState)

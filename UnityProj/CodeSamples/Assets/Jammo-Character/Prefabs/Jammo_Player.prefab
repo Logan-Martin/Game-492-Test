@@ -2110,6 +2110,7 @@ GameObject:
   - component: {fileID: 4757836856755875626}
   - component: {fileID: 3167506018720390661}
   - component: {fileID: 368816685097945305}
+  - component: {fileID: 7623753814587594662}
   m_Layer: 0
   m_Name: Jammo_Player
   m_TagString: Untagged
@@ -2301,8 +2302,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatCharacter
   team: 0
-  targetEnemy: {fileID: 0}
   maxHP: 1000
+--- !u!114 &7623753814587594662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541754002163558908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0215edd28a5ccb1478869076220604b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateController
 --- !u!1 &3921334144448749991
 GameObject:
   m_ObjectHideFlags: 0
@@ -4547,7 +4559,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
   team: 0
-  animator: {fileID: 7635726066119915157}
   combatCharacter: {fileID: 368816685097945305}
 --- !u!54 &8381518503408622422
 Rigidbody:

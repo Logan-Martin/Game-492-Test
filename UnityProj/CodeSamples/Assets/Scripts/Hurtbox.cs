@@ -4,7 +4,6 @@ using static Hitbox;
 public class Hurtbox : MonoBehaviour
 {
     public CombatTeam team;         //TODO: This replicates data in CombatCharacter. Refactor.
-    public Animator animator;
     public CombatCharacter combatCharacter;
 
     private void OnTriggerEnter(Collider other)
@@ -16,7 +15,7 @@ public class Hurtbox : MonoBehaviour
             {
                 if(incomingHitbox.hitsRemaining > 0)
                 {
-                    if (combatCharacter != null && !combatCharacter.IsDead())
+                    if (combatCharacter != null && combatCharacter.CanBeHit())
                     {
                         --incomingHitbox.hitsRemaining;
 
@@ -27,15 +26,6 @@ public class Hurtbox : MonoBehaviour
                         }
 
                         combatCharacter.InflictDamage(250);
-
-                        if (animator != null)
-                        {
-                            animator.SetTrigger(
-                                combatCharacter.IsDying() ?
-                                "dead" :
-                                "takeHit"
-                                );
-                        }
                     }
                 }
             }
