@@ -50,7 +50,7 @@ public class AttackSystem : MonoBehaviour
         lastAnimPhase = CustomAnimationPhaseType.StartingPhase;
         if (movementInputScript_Ref != null)
         {
-            movementInputScript_Ref.TogglePlayerMovement(false);
+            movementInputScript_Ref.ToggleMovement(false);
 
             // get target
             GameObject targ = attackTargetSystem_ScriptRef.GetClosestAliveTarget();
@@ -111,7 +111,7 @@ public class AttackSystem : MonoBehaviour
         //print(movementInputScript_Ref);
         if (movementInputScript_Ref != null)
         {
-            movementInputScript_Ref.TogglePlayerMovement(true);
+            movementInputScript_Ref.ToggleMovement(true);
         }
         isThisCharCurrAttacking = false;
         // ---- //

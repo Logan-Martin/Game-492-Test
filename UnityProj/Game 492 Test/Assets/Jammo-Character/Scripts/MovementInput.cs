@@ -3,7 +3,6 @@ using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using static UnityEditor.PlayerSettings;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
@@ -16,7 +15,6 @@ public class MovementInput : MonoBehaviour {
 
 	public float InputX;
 	public float InputZ;
-	public Vector2 playerInput_MovementVector;
     //
     public AttackSystem attackSystem_Ref;
     //
@@ -29,7 +27,7 @@ public class MovementInput : MonoBehaviour {
 
     public Vector3 desiredMoveDirection;
 	public bool blockRotationPlayer;
-    private bool allowPlayerMovement = true;
+    private bool allowMovement = true;
 	public float desiredRotationSpeed = 0.1f;
 	public Animator anim;
 	public float Speed;
@@ -51,31 +49,21 @@ public class MovementInput : MonoBehaviour {
     public float verticalVel;
     private Vector3 moveVector;
 
-	private PlayerInput playerInput; // For NewInputSystem
     // 00000000000000 //
 
-    public void TogglePlayerMovement(bool toggle)
+    public void ToggleMovement(bool toggle)
     {
-        print("Toggling Plr Movement!: " + toggle);
-        allowPlayerMovement = toggle;
-    }
-
-    private void Awake()
-    {
-        playerInput = GetComponent<PlayerInput>();
+        print("Toggling Movement!: " + toggle);
+        allowMovement = toggle;
     }
 
     // Use this for initialization
     void Start () {
 		anim = this.GetComponent<Animator> ();
-		cam = Camera.main;
-		controller = this.GetComponent<CharacterController>();
+        cam = Camera.main;
+        controller = this.GetComponent<CharacterController>();
 	}
 	
-    public void UpdateInput_PlayerMovementVector2(InputAction.CallbackContext context)
-    {
-        playerInput_MovementVector = context.ReadValue<Vector2>(); // read from context as a Vector2, as is the type
-    }
 
     private void CheckForAndStepAppliedRootMotion()
     {
@@ -90,9 +78,8 @@ public class MovementInput : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //print(allowPlayerMovement);
-        //print(needToStepAppliedRootMotion);
-		InputMagnitude(); // if plrMovement off, this just takes the inputs and doesn't update movement w/ Move()
+        InputMagnitude_MovementDriver(); 
+        // ^^Note: InputZ, InputX are set by PlrMovementInput or EnemyStateSystem
 
         // step for applying Attack Root Transform motion
         CheckForAndStepAppliedRootMotion();
@@ -109,27 +96,26 @@ public class MovementInput : MonoBehaviour {
         // below is ater plr movement already happens
         moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
         controller.Move(moveVector);
-
-
     }
 
-    void PlayerMoveAndRotation() {
-		//InputX = Input.GetAxis ("Horizontal");
-		//InputZ = Input.GetAxis ("Vertical");
-		InputX = playerInput_MovementVector.x;
-		InputZ = playerInput_MovementVector.y;
-
-
-
+    void MoveAndRotation() {
         var camera = Camera.main;
-		var forward = cam.transform.forward;
-		var right = cam.transform.right;
+        var forward = this.gameObject.transform.forward;
+        var right = this.gameObject.transform.right;
 
-		forward.y = 0f;
-		right.y = 0f;
+        // ONLY FOR PLAYER
+        if (this.gameObject.CompareTag("Player"))
+        {
+            forward = cam.transform.forward;
+            right = cam.transform.right;
 
-		forward.Normalize ();
-		right.Normalize ();
+            forward.y = 0f;
+            right.y = 0f;
+
+            forward.Normalize();
+            right.Normalize();
+        }
+        // ----- //
 
         if (needToStepAppliedRootMotion == false)
         {
@@ -159,26 +145,17 @@ public class MovementInput : MonoBehaviour {
         t.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
     }
 
-	void InputMagnitude() {
-        //Calculate Input Vectors
-        //InputX = Input.GetAxis ("Horizontal");
-        //InputZ = Input.GetAxis ("Vertical");
-        InputX = playerInput_MovementVector.x;
-        InputZ = playerInput_MovementVector.y;
-
-        //anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
-        //anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
-
+	void InputMagnitude_MovementDriver() {
         //Calculate the Input Magnitude
         Speed = new Vector2(InputX, InputZ).sqrMagnitude;
 
         //Physically move player
-        if (allowPlayerMovement)
+        if (allowMovement)
         {
             if (Speed > allowPlayerRotation)
             {
                 anim.SetFloat("Blend", Speed, StartAnimTime, Time.deltaTime);
-                PlayerMoveAndRotation();
+                MoveAndRotation();
             }
             else if (Speed < allowPlayerRotation)
             {
@@ -187,9 +164,8 @@ public class MovementInput : MonoBehaviour {
         }
 	}
 
-    public void InputFunc_Attack(InputAction.CallbackContext context) // event needs to be connected to EventSystem GameObj. -> PlayerInput
+    public void AttackFunc() 
     {
-        if (!context.performed) { return; } // so below then if it's perf code below will run
         if (attackSystem_Ref.lastAnimPhase == CustomAnimationPhaseType.LeavingPhase || attackSystem_Ref.lastAnimPhase == CustomAnimationPhaseType.None) // not in anim commit window
         {
             // Check for Normal or Another Type of Attack Needed
@@ -227,14 +203,5 @@ public class MovementInput : MonoBehaviour {
                 // wrong str given
             }
         }
-
-
-        //context.phase = InputActionPhase.Performed; // Started, Waiting, Performed, Canceled, Disabled
-        //context.duration = 0;
-        //context.performed // shorthand for phase?
-        //context.startTime;
-        //context.time;
-        //context.ReadValue();
-        //context.started // shorthand for phase?
     }
 }

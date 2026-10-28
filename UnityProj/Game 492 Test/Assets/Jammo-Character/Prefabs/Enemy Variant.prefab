@@ -1389,6 +1389,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4674506573289431724}
+    - targetCorrespondingSourceObject: {fileID: 3541754002163558908, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7497779187474790684}
   m_SourcePrefab: {fileID: 100100000, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
 --- !u!4 &797978785646134472 stripped
 Transform:
@@ -1435,7 +1438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlrAttackSystem
   animator: {fileID: 8335435087834656465}
-  movementInputScript_Ref: {fileID: 0}
+  movementInputScript_Ref: {fileID: 7497779187474790684}
   punchHitbox_R: {fileID: 6177028687303758189}
   punchHitbox_L: {fileID: 7209991078366763753}
   hurrKickHitbox: {fileID: 4964023815885403732}
@@ -1459,6 +1462,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba99e2b3f9abab141a5e5594b68cf86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateSystem
+  plrRef: {fileID: 0}
+  healthSyst_Ref: {fileID: 1819046060954435615}
+  enemyTurnSyst_Ref: {fileID: 0}
+  attackSystem_Ref: {fileID: 1010567412207197933}
+  animator: {fileID: 8335435087834656465}
+  movementInputScript: {fileID: 7497779187474790684}
+  controller: {fileID: 6367488456846964591}
+--- !u!114 &7497779187474790684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3133432311307334072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa9f165e2b4f1a4f9522501717c095d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementInput
+  Velocity: 0
+  InputX: 0
+  InputZ: 0
+  attackSystem_Ref: {fileID: 1010567412207197933}
+  needToStepAppliedRootMotion: 0
+  SPEED_AppRtMotion: 10
+  appliedRootMotion_EndGoal: {x: 0, y: 0, z: 0}
+  stTime_AppRtMotion: 0
+  desiredMoveDirection: {x: 0, y: 0, z: 0}
+  blockRotationPlayer: 0
+  desiredRotationSpeed: 0.1
+  anim: {fileID: 8335435087834656465}
+  Speed: 0
+  allowPlayerRotation: 0.1
+  cam: {fileID: 0}
+  controller: {fileID: 6367488456846964591}
+  isGrounded: 0
+  HorizontalAnimSmoothTime: 0.2
+  VerticalAnimTime: 0.2
+  StartAnimTime: 0.3
+  StopAnimTime: 0.15
+  verticalVel: 0
+--- !u!143 &6367488456846964591 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 4757836856755875627, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}
+  m_PrefabInstance: {fileID: 1899083536366999620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7824333964510664467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8561193508396601175, guid: bd6ee82c5e06b3f4f86113cbf8261ae1, type: 3}

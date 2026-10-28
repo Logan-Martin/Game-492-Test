@@ -23,9 +23,9 @@ public class RegisterHitsTaken : MonoBehaviour
         if (healthSystemRef.GetHealth() > 0) // if alive check
         {
             print("took hit!");
+
             Transform transform_PARENT = other.gameObject.transform;
             Transform transformToSet = other.gameObject.transform;
-
             GameObject hitVFX_Clone = Instantiate(hitVFX_Prefab_Ref, transform_PARENT.position, Quaternion.identity);
 
             healthSystemRef.AddOrSubToHealth(-25); // need to change thing to be data-driven

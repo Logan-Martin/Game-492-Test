@@ -65,7 +65,7 @@ public class HealthSystem : MonoBehaviour
         }
         if (tempCheck <= 0) // this check for if hitting would kill char entirely
         {
-            tempCheck = 0;
+            tempCheck = 0;            
             animator.SetTrigger("PlayCharDeathAnim");
             health = tempCheck;
             return;
