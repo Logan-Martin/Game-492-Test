@@ -15,14 +15,14 @@ public class RegisterHitsTaken : MonoBehaviour
     private void Start()
     {
         currentTag = this.gameObject.tag;
-        print("TEST!");
+        //print("TEST!");
     }
 
     private void DoGettingHurtStuff(Collider other)
     {
         if (healthSystemRef.GetHealth() > 0) // if alive check
         {
-            print("took hit!");
+            //print("took hit!");
 
             Transform transform_PARENT = other.gameObject.transform;
             Transform transformToSet = other.gameObject.transform;
@@ -35,7 +35,7 @@ public class RegisterHitsTaken : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //print(other);
-        print("OnTriggerEntered: " + other.tag + "| Allowed: " + strToAllow);
+        //print("OnTriggerEntered: " + other.tag + "| Allowed: " + strToAllow);
         if (other.CompareTag(strToAllow) == true)
         {
             DoGettingHurtStuff(other);

@@ -40,13 +40,14 @@ public class EnemyStateSystem : MonoBehaviour
     {
         if (newState != currEnemyState)
         {
+            print("Enemy Switch States! | Old: " + currEnemyState + " | New: " + newState);
             currEnemyState = newState;
 
             switch (currEnemyState)
             {
                 case EnemyState.Spawning:
                     // play spawn anim
-                    //animator.SetTrigger("PlaySpawnAnim");
+                    animator.SetTrigger("PlaySpawnAnim");
                     break;
                 case EnemyState.ApproachingTarg:
                     // add to potential targ list
@@ -73,20 +74,29 @@ public class EnemyStateSystem : MonoBehaviour
         }
     }
 
-    // Animation Events:
-    public void PlayCharDeathAnim()
+
+    // Animation Events baked into Anims:
+    public void CharDeathAnim_Started()
     {
         SetEnemyState(EnemyState.Dying);
     }
-    public void PlayCharTakingPunchAnim()
+    public void CharDeathAnim_Ended()
+    {
+        SetEnemyState(EnemyState.Dead);
+    }
+    public void CharTakingPunchAnim_Started()
     {
         SetEnemyState(EnemyState.Stunned);
+    }
+    public void CharTakingPunchAnim_Ended()
+    {
+        SetEnemyState(EnemyState.WaitingForTurn);
     }
     public void AttackAnim_Leaving()
     {
         SetEnemyState(EnemyState.WaitingForTurn);
     }
-    public void SpawnAnimDonePlaying_Trigger()
+    public void SpawnAnimDonePlaying_Trigger() // Not implemented yet
     {
         SetEnemyState(EnemyState.ApproachingTarg);
     }

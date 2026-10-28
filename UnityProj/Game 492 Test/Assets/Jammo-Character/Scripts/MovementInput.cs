@@ -53,7 +53,7 @@ public class MovementInput : MonoBehaviour {
 
     public void ToggleMovement(bool toggle)
     {
-        print("Toggling Movement!: " + toggle);
+        //print("Toggling Movement!: " + toggle);
         allowMovement = toggle;
     }
 

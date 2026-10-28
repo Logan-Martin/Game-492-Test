@@ -31,7 +31,7 @@ public class PlrMovementInput : MonoBehaviour {
     void Update () {
         movementInputScript.InputX = playerInput_MovementVector.x;
         movementInputScript.InputZ = playerInput_MovementVector.y;
-        print("" + playerInput_MovementVector.x + " | " + playerInput_MovementVector.y);
+        //print("" + playerInput_MovementVector.x + " | " + playerInput_MovementVector.y);
     }
 
     // !!event needs to be connected to EventSystem GameObj. -> PlayerInput
