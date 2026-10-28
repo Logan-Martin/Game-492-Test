@@ -30,7 +30,7 @@ public class EnemyStateSystem : MonoBehaviour
     [SerializeField] public CharacterController controller;
 
     private float distToPlr = 0;
-    private float distToChangeToWaitingForTurnState = 6f;
+    private float distToChangeToWaitingForTurnState = 3f * 3f;
 
     Vector3 vectDirToTarg_Normalized = Vector3.zero;
     //
@@ -55,7 +55,10 @@ public class EnemyStateSystem : MonoBehaviour
                     break;
                 case EnemyState.WaitingForTurn:
                     // coming from approaching, stop moving?
-                    
+                    movementInputScript.InputX = 0; // ?
+                    movementInputScript.InputZ = 0;
+                    movementInputScript.ToggleMovement(false);
+
                     break;
                 case EnemyState.Attacking:
                     movementInputScript.AttackFunc(); // more powerful to choose which attack from combo
@@ -125,6 +128,7 @@ public class EnemyStateSystem : MonoBehaviour
             case EnemyState.ApproachingTarg:
                 // go till close enough to targ
                 // to then go to Waiting for turn
+                //print(distToPlr);
                 if (distToPlr <= distToChangeToWaitingForTurnState)
                 {
                     SetEnemyState(EnemyState.WaitingForTurn);
@@ -133,20 +137,27 @@ public class EnemyStateSystem : MonoBehaviour
                 {
                     movementInputScript.InputX = vectDirToTarg_Normalized.x;
                     movementInputScript.InputZ = vectDirToTarg_Normalized.z;
+                    movementInputScript.ToggleMovement(true);
                 }
                 // OR if took a hit, go to Hitstun State
                 break;
             case EnemyState.WaitingForTurn:
                 // turn system needed to choose
                 // this called coming from seperate script ?
+                if (distToPlr >= distToChangeToWaitingForTurnState)
+                {
+                    SetEnemyState(EnemyState.ApproachingTarg);
+                }
+                else
+                {
+                    //?
+                }
 
-                // OR if took a hit, go to Hitstun
                 break;
             case EnemyState.Attacking:
                 // curr in attacking, then need to get out
                 // when attackAnim finished
 
-                // OR if took a hit while attacking, go to hitstun
                 break;
             case EnemyState.Stunned:                
                 // if hitStunAnim finished && health > 0, go back to WaitingForTurn

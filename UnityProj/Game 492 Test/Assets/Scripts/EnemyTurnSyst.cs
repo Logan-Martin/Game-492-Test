@@ -8,12 +8,17 @@ public class EnemyTurnSyst : MonoBehaviour
 
     public void AddEnemyToTurnSystemList(GameObject enemy)
     {
-        enemyList.Add(enemy);
+        if (!enemyList.Contains(enemy)) {
+            enemyList.Add(enemy);
+        }
     }
 
     public void RemoveEnemyFromTurnSystem(GameObject enemy)
     {
-        enemyList.Remove(enemy);
+        bool check = enemyList.Remove(enemy);
+        if (check == false) {
+            print("error! failed to remove enemy from turn list?!");
+        }
     }
 
     private GameObject PickEnemyToDoTurn()

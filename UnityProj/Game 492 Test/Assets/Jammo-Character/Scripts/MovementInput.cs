@@ -94,6 +94,7 @@ public class MovementInput : MonoBehaviour {
             verticalVel -= 1;
         }
         // below is ater plr movement already happens
+        // Gravity:
         moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
         controller.Move(moveVector);
     }
@@ -114,13 +115,17 @@ public class MovementInput : MonoBehaviour {
 
             forward.Normalize();
             right.Normalize();
+
+            if (needToStepAppliedRootMotion == false)
+            {
+                desiredMoveDirection = forward * InputZ + right * InputX;
+            }
+        }
+        else
+        {
+            desiredMoveDirection = new Vector3(InputX, 0, InputZ);
         }
         // ----- //
-
-        if (needToStepAppliedRootMotion == false)
-        {
-            desiredMoveDirection = forward * InputZ + right * InputX;
-        }
 
         if (blockRotationPlayer == false) {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
