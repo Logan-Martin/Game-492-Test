@@ -1563,6 +1563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd627b4b96f77844a494a67c7a1368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyTurnSyst
+  globalEnemyAttackAttemptCooldown: 2
 --- !u!4 &739120678
 Transform:
   m_ObjectHideFlags: 0
@@ -2220,8 +2221,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06336526, y: 0.000000116989504, z: -0.0000000074279987, w: 0.9979904}
-  m_LocalPosition: {x: 0, y: 1.2099999, z: -4}
+  m_LocalRotation: {x: 0.10410121, y: -0.012821989, z: 0.0013421894, w: 0.9944832}
+  m_LocalPosition: {x: 0.1546916, y: 2.42, z: -5.9980054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3563,6 +3564,7 @@ GameObject:
   - component: {fileID: 1731146179}
   - component: {fileID: 1731146178}
   - component: {fileID: 1731146181}
+  - component: {fileID: 1731146182}
   m_Layer: 0
   m_Name: mainHurtbox
   m_TagString: PlrHurtbox
@@ -3690,6 +3692,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1731146182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731146176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ff468df6634d049998f3e3291711aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RegisterHitsTaken
+  healthSystemRef: {fileID: 5006512736820427415}
+  strToAllow: EnemyHitbox
+  hitVFX_Prefab_Ref: {fileID: 8762405910555896786, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
 --- !u!1 &1736418408
 GameObject:
   m_ObjectHideFlags: 0
@@ -5096,7 +5113,7 @@ PrefabInstance:
     - target: {fileID: 1010567412207197933, guid: 9779f3bf7b9c63f469655ca54f0130f6, type: 3}
       propertyPath: ApplyRootTransformTowardPoint_ScriptRef
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8719123929563459797}
     - target: {fileID: 2100764080592815019, guid: 9779f3bf7b9c63f469655ca54f0130f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.28545
@@ -5199,6 +5216,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4928ee42b83342b4a82b8d2d90c37f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+--- !u!114 &8719123929563459797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2705502894576498981, guid: 9779f3bf7b9c63f469655ca54f0130f6, type: 3}
+  m_PrefabInstance: {fileID: 8719123929563459793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3684d3c1b98a5b48acdbe2a1e6e4824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ApplyRootTransformTowardPoint
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
 public class EnemyStateSystem : MonoBehaviour
@@ -26,21 +27,30 @@ public class EnemyStateSystem : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private MovementInput movementInputScript;
 
-
     [SerializeField] public CharacterController controller;
 
     private float distToPlr = 0;
     private float distToChangeToWaitingForTurnState = 3f * 3f;
-
+    
     Vector3 vectDirToTarg_Normalized = Vector3.zero;
     //
     // ---------- //
+
+
+    public float GetCurrDist_SqrMag_ToPlr()
+    {
+        return distToPlr;
+    }
+    public EnemyState GetCurrEnemyState()
+    {
+        return currEnemyState;
+    }
 
     public void SetEnemyState(EnemyState newState)
     {
         if (newState != currEnemyState)
         {
-            print("Enemy Switch States! | Old: " + currEnemyState + " | New: " + newState);
+            //print("Enemy Switch States! | Old: " + currEnemyState + " | New: " + newState);
             currEnemyState = newState;
 
             switch (currEnemyState)
@@ -50,7 +60,6 @@ public class EnemyStateSystem : MonoBehaviour
                     animator.SetTrigger("PlaySpawnAnim");
                     break;
                 case EnemyState.ApproachingTarg:
-                    // add to potential targ list
                     enemyTurnSyst_Ref.AddEnemyToTurnSystemList(this.gameObject);
                     break;
                 case EnemyState.WaitingForTurn:
@@ -69,6 +78,7 @@ public class EnemyStateSystem : MonoBehaviour
                     break;
                 case EnemyState.Dying:
                     // RegisterHitsTaken -> HealthSystem -> Play Anim w/ Trigger -> Set Dying
+                    enemyTurnSyst_Ref.RemoveEnemyFromTurnSystem(this.gameObject);
                     break;
                 case EnemyState.Dead:
                     //Destroy(this.gameObject);
@@ -150,7 +160,13 @@ public class EnemyStateSystem : MonoBehaviour
                 }
                 else
                 {
-                    //?
+                    /*
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        print("pressed!");
+                        movementInputScript.AttackFunc();
+                    }
+                    */
                 }
 
                 break;

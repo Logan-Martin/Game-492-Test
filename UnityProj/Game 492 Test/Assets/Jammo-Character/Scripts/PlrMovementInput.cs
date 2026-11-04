@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static EnemyStateSystem;
 using static UnityEditor.PlayerSettings;
 
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
@@ -40,4 +41,34 @@ public class PlrMovementInput : MonoBehaviour {
         if (!context.performed) { return; } // so below then if it's perf code below will run
         movementInputScript.AttackFunc();
     }
+
+    // -------------- //
+
+    // Animation Events baked into Anims:
+    public void CharDeathAnim_Started()
+    {
+        //SetEnemyState(EnemyState.Dying);
+    }
+    public void CharDeathAnim_Ended()
+    {
+        // Reset plr health and such
+        //SetEnemyState(EnemyState.Dead);
+    }
+    public void CharTakingPunchAnim_Started()
+    {
+        //SetEnemyState(EnemyState.Stunned);
+    }
+    public void CharTakingPunchAnim_Ended()
+    {
+        //SetEnemyState(EnemyState.WaitingForTurn);
+    }
+    public void AttackAnim_Leaving()
+    {
+        //SetEnemyState(EnemyState.WaitingForTurn);
+    }
+    public void SpawnAnimDonePlaying_Trigger() // Not implemented yet
+    {
+        //SetEnemyState(EnemyState.ApproachingTarg);
+    }
+    // --------------- //
 }

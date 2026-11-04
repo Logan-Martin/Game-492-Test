@@ -28,13 +28,15 @@ public class AttackSystem : MonoBehaviour
     public GameObject hurrKickHitbox;
     // ---- //
     public AttackTargetSystem attackTargetSystem_ScriptRef;
-    public ApplyRootTransformTowardPoint ApplyRootTransformTowardPoint_ScriptRef;
+    [SerializeField] private ApplyRootTransformTowardPoint ApplyRootTransformTowardPoint_ScriptRef;
     public float NonTarg_AppliedRtMotionDist = 5f;
 
     public bool isThisCharCurrAttacking = false;
 
     public float tSinceLastPerfAttack = 0f; // will store to compare old and next Time.time
     public float tWindowToAllowNxtAttack = 1f;
+    //public bool onAttackCooldown = false;
+
     public AttackType lastAttackType = AttackType.None; // None, Base, 2nd, 3rd
     public CustomAnimationPhaseType lastAnimPhase = CustomAnimationPhaseType.None;
 
@@ -53,8 +55,8 @@ public class AttackSystem : MonoBehaviour
             movementInputScript_Ref.ToggleMovement(false);
 
             // get target
-            GameObject targ = attackTargetSystem_ScriptRef.GetClosestAliveTarget();
-            if (targ == null) {
+            if (attackTargetSystem_ScriptRef == null)
+            {
                 // then move in general forward
                 Vector3 offset = this.gameObject.transform.forward * NonTarg_AppliedRtMotionDist;
                 Vector3 computedEndPt = this.gameObject.transform.position + (offset);
@@ -62,8 +64,19 @@ public class AttackSystem : MonoBehaviour
             }
             else
             {
-                // then move toward target player
-                ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(targ.transform.position);
+                GameObject targ = attackTargetSystem_ScriptRef.GetClosestAliveTarget();
+                if (targ == null)
+                {
+                    // then move in general forward
+                    Vector3 offset = this.gameObject.transform.forward * NonTarg_AppliedRtMotionDist;
+                    Vector3 computedEndPt = this.gameObject.transform.position + (offset);
+                    ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(computedEndPt);
+                }
+                else
+                {
+                    // then move toward target player
+                    ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(targ.transform.position);
+                }
             }
         }
     }
