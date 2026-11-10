@@ -175,7 +175,7 @@ public class MovementInput : MonoBehaviour {
         {
             // Check for Normal or Another Type of Attack Needed
             //print(Time.time - tSinceLastPerfAttack);
-            if (!((Time.time - attackSystem_Ref.tSinceLastPerfAttack) < attackSystem_Ref.tWindowToAllowNxtAttack) || (attackSystem_Ref.lastAttackType == AttackType.None))
+            if (!((Time.time - attackSystem_Ref.tSinceLastPerfAttack) < attackSystem_Ref.tWindowToAllowNextAttack) || (attackSystem_Ref.lastAttackType == AttackType.None))
             {
                 // if NOT [within time window to allow next attack] OR [lastAttack was set to None meaning a chain alr happened or time passed]
                 // -so do normal attack work

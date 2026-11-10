@@ -34,7 +34,7 @@ public class AttackSystem : MonoBehaviour
     public bool isThisCharCurrAttacking = false;
 
     public float tSinceLastPerfAttack = 0f; // will store to compare old and next Time.time
-    public float tWindowToAllowNxtAttack = 1f;
+    public float tWindowToAllowNextAttack = 1f;
     //public bool onAttackCooldown = false;
 
     public AttackType lastAttackType = AttackType.None; // None, Base, 2nd, 3rd

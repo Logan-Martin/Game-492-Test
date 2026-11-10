@@ -39,12 +39,16 @@ public class EnemyTurnSyst : MonoBehaviour
             EnemyStateSystem.EnemyState currState = enemyStateSyst_Ref.GetCurrEnemyState();
             if (currState == EnemyStateSystem.EnemyState.WaitingForTurn) // bc can be Approaching, WaitingForTurn, Attacking, Stunned
             {
-                // if locked on, have priority???
-                        // note Plr has AttackTargetSystem.cs but that's different than lockedOn
-                //float localScore = enemyList.IndexOf(item);
+                AttackSystem attackSystemRef = item.GetComponent<AttackSystem>();
+                float tLastAttack = (Time.time - attackSystemRef.tSinceLastPerfAttack);
+                 //if locked on, have priority???
+                 // note Plr has AttackTargetSystem.cs but that's different than lockedOn
+                 //float localScore = enemyList.IndexOf(item);
 
 
-                float localScore = enemyStateSyst_Ref.GetCurrDist_SqrMag_ToPlr();
+                float localScore = Mathf.Sqrt(enemyStateSyst_Ref.GetCurrDist_SqrMag_ToPlr());
+                localScore += tLastAttack;
+
                 if (score != 0)
                 {
                     if (localScore < score) // whoever closest 
