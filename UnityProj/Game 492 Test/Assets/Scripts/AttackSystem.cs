@@ -20,6 +20,7 @@ public enum CustomAnimationPhaseType
 
 public class AttackSystem : MonoBehaviour
 {
+    private GameObject plrRef;
     public Animator animator; //assuming i need this to change anims
                        // CharacterSkinController does ```animator.SetTrigger(str trigger);```
     public MovementInput movementInputScript_Ref; // Note: only for plr, Null checks in code when needed
@@ -48,7 +49,16 @@ public class AttackSystem : MonoBehaviour
         if (this.gameObject.CompareTag("Player"))
         {
             attackTargetSystem_ScriptRef = this.gameObject.GetComponent<AttackTargetSystem>();
+
             if (attackTargetSystem_ScriptRef == null)
+            {
+                print("Error w/ initialization of refrence!");
+            }
+        }
+        else
+        {
+            plrRef = GameObject.FindGameObjectWithTag("Player");
+            if (plrRef == null)
             {
                 print("Error w/ initialization of refrence!");
             }
@@ -67,9 +77,9 @@ public class AttackSystem : MonoBehaviour
             if (attackTargetSystem_ScriptRef == null) // FOR ENEMY NOT PLAYER
             {
                 // then move in general forward
-                Vector3 offset = this.gameObject.transform.forward * NonTarg_AppliedRtMotionDist;
-                Vector3 computedEndPt = this.gameObject.transform.position + (offset);
-                ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(computedEndPt);
+                //Vector3 offset = this.gameObject.transform.forward * NonTarg_AppliedRtMotionDist;
+                //Vector3 computedEndPt = this.gameObject.transform.position + (offset);
+                ApplyRootTransformTowardPoint_ScriptRef.ApplyRootTransOnCharToPoint(plrRef.transform.position);
             }
             else
             {

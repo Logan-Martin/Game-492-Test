@@ -183,6 +183,11 @@ public class MovementInput : MonoBehaviour {
     {
         if (attackSystem_Ref.lastAnimPhase == CustomAnimationPhaseType.LeavingPhase || attackSystem_Ref.lastAnimPhase == CustomAnimationPhaseType.None) // not in anim commit window
         {
+            if (healthSystem_Ref.GetHealth() == 0)
+            {
+                return;
+            }
+
             // Check for Normal or Another Type of Attack Needed
             //print(Time.time - tSinceLastPerfAttack);
             if (!((Time.time - attackSystem_Ref.tSinceLastPerfAttack) < attackSystem_Ref.tWindowToAllowNextAttack) || (attackSystem_Ref.lastAttackType == AttackType.None))
