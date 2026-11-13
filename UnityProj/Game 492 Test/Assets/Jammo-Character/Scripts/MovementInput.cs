@@ -17,6 +17,7 @@ public class MovementInput : MonoBehaviour {
 	public float InputZ;
     //
     public AttackSystem attackSystem_Ref;
+    private HealthSystem healthSystem_Ref;
     //
     public bool needToStepAppliedRootMotion = false;
     public float SPEED_AppRtMotion = 10f;
@@ -62,7 +63,13 @@ public class MovementInput : MonoBehaviour {
 		anim = this.GetComponent<Animator> ();
         cam = Camera.main;
         controller = this.GetComponent<CharacterController>();
-	}
+        healthSystem_Ref = this.GetComponent<HealthSystem>();
+
+        if (controller == null || healthSystem_Ref == null)
+        {
+            print("Error w/ refrence setup!");
+        }
+    }
 	
 
     private void CheckForAndStepAppliedRootMotion()
@@ -78,8 +85,11 @@ public class MovementInput : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        InputMagnitude_MovementDriver(); 
-        // ^^Note: InputZ, InputX are set by PlrMovementInput or EnemyStateSystem
+        if (healthSystem_Ref.GetHealth() != 0) { // Allow Plr or Enemy Movement inputs if NOT dead
+            InputMagnitude_MovementDriver();
+            // ^^Note: InputZ, InputX are set by PlrMovementInput or EnemyStateSystem
+        } 
+        // if they dead, it's skipped, but we still want them to fall w/ gravity & say an applied force of knockback
 
         // step for applying Attack Root Transform motion
         CheckForAndStepAppliedRootMotion();

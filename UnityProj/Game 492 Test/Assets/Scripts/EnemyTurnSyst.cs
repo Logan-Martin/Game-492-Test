@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyTurnSyst : MonoBehaviour
 {
+    private GameObject plrRef;
+
     [SerializeField] private float globalEnemyAttackAttemptCooldown = 2f;
     private float tSinceLastAttackAttempt = 0f;
     private bool enemyAttackingInProgress = false;
@@ -72,11 +74,26 @@ public class EnemyTurnSyst : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        plrRef = GameObject.FindGameObjectWithTag("Player");
+        if (plrRef == null)
+        {
+            print("Error in set up of refs!");
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (enemyList.Count >= 1)
         {
+            if (plrRef.GetComponent<HealthSystem>().GetHealth() == 0)
+            {
+                // player is dead, drop attacking
+                return;
+            }
+
             float temp = Time.time;
             if (((temp - tSinceLastAttackAttempt) >= globalEnemyAttackAttemptCooldown)) {
                 //if (enemyAttackingInProgress == false)
