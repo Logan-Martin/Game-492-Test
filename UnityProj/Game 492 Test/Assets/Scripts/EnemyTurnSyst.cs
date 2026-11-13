@@ -7,7 +7,13 @@ public class EnemyTurnSyst : MonoBehaviour
 
     [SerializeField] private float globalEnemyAttackAttemptCooldown = 2f;
     private float tSinceLastAttackAttempt = 0f;
-    private bool enemyAttackingInProgress = false;
+    //private bool enemyAttackingInProgress = false;
+    // -- Score Vars: -- //
+    private float maxDist = 50f;
+    private float maxTime = 20f;
+    private float DistWeight = 0.7f;
+    private float TimeWeight = 0.3f;
+    // ----------------  //
 
     List<GameObject> enemyList = new List<GameObject>();
     //float cooldownBetweenChoosingNextEnemy = 1f;
@@ -41,16 +47,25 @@ public class EnemyTurnSyst : MonoBehaviour
             EnemyStateSystem.EnemyState currState = enemyStateSyst_Ref.GetCurrEnemyState();
             if (currState == EnemyStateSystem.EnemyState.WaitingForTurn) // bc can be Approaching, WaitingForTurn, Attacking, Stunned
             {
+                // Time Score Compute: //
                 AttackSystem attackSystemRef = item.GetComponent<AttackSystem>();
                 float tLastAttack = (Time.time - attackSystemRef.tSinceLastPerfAttack);
-                 //if locked on, have priority???
-                 // note Plr has AttackTargetSystem.cs but that's different than lockedOn
-                 //float localScore = enemyList.IndexOf(item);
+                float tSinceLastAttack_Normalized = (tLastAttack / maxTime);
+                float tSinceLastAttack_Normalized_Clamped = Mathf.Clamp(tSinceLastAttack_Normalized, 0, 1);
+                // ---- //
 
 
-                float localScore = Mathf.Sqrt(enemyStateSyst_Ref.GetCurrDist_SqrMag_ToPlr());
-                localScore += tLastAttack;
+                // Dist. Score Compute: //
+                float distSqr = Mathf.Sqrt(enemyStateSyst_Ref.GetCurrDist_SqrMag_ToPlr());
+                float distSqr_Normalized = (1 - (distSqr / maxDist));
+                float distSqr_Normalized_Clamped = Mathf.Clamp(distSqr_Normalized, 0, 1);
+                // ---- //
 
+
+                float localScore = ((tSinceLastAttack_Normalized_Clamped * TimeWeight) 
+                                  + (distSqr_Normalized_Clamped * DistWeight));
+
+                print("localScore: " + localScore);
                 if (score != 0)
                 {
                     if (localScore < score) // whoever closest 
