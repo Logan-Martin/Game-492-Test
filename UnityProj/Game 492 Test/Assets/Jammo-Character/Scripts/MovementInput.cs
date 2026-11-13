@@ -32,7 +32,7 @@ public class MovementInput : MonoBehaviour {
 	public Animator anim;
 	public float Speed;
 	public float allowPlayerRotation = 0.1f;
-	public Camera cam;
+	[HideInInspector] public Camera cam; // keeping public but setting in start
 	public CharacterController controller;
 	public bool isGrounded;
 

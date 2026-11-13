@@ -27,7 +27,6 @@ public class PlrMovementInput : MonoBehaviour {
         playerInput_MovementVector = context.ReadValue<Vector2>(); // read from context as a Vector2, as is the type
     }
 
-
     // Update is called once per frame
     void Update () {
         movementInputScript.InputX = playerInput_MovementVector.x;

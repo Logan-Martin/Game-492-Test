@@ -44,6 +44,15 @@ public class AttackSystem : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+
+        if (this.gameObject.CompareTag("Player"))
+        {
+            attackTargetSystem_ScriptRef = this.gameObject.GetComponent<AttackTargetSystem>();
+            if (attackTargetSystem_ScriptRef == null)
+            {
+                print("Error w/ initialization of refrence!");
+            }
+        }
     }
 
     // Attack Animation Events: // For Animation Phase State
@@ -55,7 +64,7 @@ public class AttackSystem : MonoBehaviour
             movementInputScript_Ref.ToggleMovement(false);
 
             // get target
-            if (attackTargetSystem_ScriptRef == null)
+            if (attackTargetSystem_ScriptRef == null) // FOR ENEMY NOT PLAYER
             {
                 // then move in general forward
                 Vector3 offset = this.gameObject.transform.forward * NonTarg_AppliedRtMotionDist;

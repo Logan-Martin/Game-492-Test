@@ -10,6 +10,8 @@ TagManager:
   - PlrHurtbox
   - EnemyHurtbox
   - EnemyHitbox
+  - CustomGlobalSystemsGameObjTag
+  - MainEnemyFolderContainer
   layers:
   - Default
   - TransparentFX

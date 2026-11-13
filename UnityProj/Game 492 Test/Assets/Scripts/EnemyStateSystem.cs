@@ -116,7 +116,14 @@ public class EnemyStateSystem : MonoBehaviour
     // --------------- //
     private void Start()
     {
-        SetEnemyState(EnemyState.Spawning);
+        plrRef = GameObject.FindGameObjectWithTag("Player");
+        enemyTurnSyst_Ref = GameObject.FindGameObjectWithTag("CustomGlobalSystemsGameObjTag").GetComponent<EnemyTurnSyst>();
+        if (plrRef == null || enemyTurnSyst_Ref == null)
+        {
+            print("Error w/ initialization of refrences!");
+        }
+
+        //SetEnemyState(EnemyState.Spawning);
     }
 
     // Update is called once per frame
