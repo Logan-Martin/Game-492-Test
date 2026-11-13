@@ -12,6 +12,7 @@ TagManager:
   - EnemyHitbox
   - CustomGlobalSystemsGameObjTag
   - MainEnemyFolderContainer
+  - EnemySpawnersContainer
   layers:
   - Default
   - TransparentFX

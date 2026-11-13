@@ -44,7 +44,7 @@ public class AttackTargetSystem : MonoBehaviour
         }
         else
         {
-            print("Got closest Target!");
+            //print("Got closest Target!");
         }
 
         return closestTarg;
