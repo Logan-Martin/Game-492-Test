@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8940830680808935245}
   - component: {fileID: 2500686590649459965}
   - component: {fileID: 2866234116401247916}
+  - component: {fileID: 4184858464327653994}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -49,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8273384579430297426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -106,3 +107,15 @@ MonoBehaviour:
   prefabObj: {fileID: 8446995266803930436, guid: c5733380a50bf034abecdd8009daff73, type: 3}
   enemyFolder: {fileID: 0}
   spawnOnStart: 0
+--- !u!114 &4184858464327653994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273384579430297426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63e602351dbd4d41afa5c0d6acbf32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

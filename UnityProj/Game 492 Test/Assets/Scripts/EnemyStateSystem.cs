@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -26,6 +27,8 @@ public class EnemyStateSystem : MonoBehaviour
     [SerializeField] private AttackSystem attackSystem_Ref;
     [SerializeField] private Animator animator;
     [SerializeField] private MovementInput movementInputScript;
+    [SerializeField] private EnemyWaveSystem enemyWaveSystem_Ref;
+    public event Action<GameObject> OnEnemyDeath;
 
     [SerializeField] public CharacterController controller;
 
@@ -79,6 +82,7 @@ public class EnemyStateSystem : MonoBehaviour
                 case EnemyState.Dying:
                     // RegisterHitsTaken -> HealthSystem -> Play Anim w/ Trigger -> Set Dying
                     enemyTurnSyst_Ref.RemoveEnemyFromTurnSystem(this.gameObject);
+                    OnEnemyDeath?.Invoke(this.gameObject); // Event call, picked up by EnemyWaveSystem.cs
                     break;
                 case EnemyState.Dead:
                     //Destroy(this.gameObject);
@@ -117,7 +121,9 @@ public class EnemyStateSystem : MonoBehaviour
     private void Start()
     {
         plrRef = GameObject.FindGameObjectWithTag("Player");
-        enemyTurnSyst_Ref = GameObject.FindGameObjectWithTag("CustomGlobalSystemsGameObjTag").GetComponent<EnemyTurnSyst>();
+        GameObject CustomGlobalSystemsGameObj = GameObject.FindGameObjectWithTag("CustomGlobalSystemsGameObjTag");
+        enemyTurnSyst_Ref = CustomGlobalSystemsGameObj.GetComponent<EnemyTurnSyst>();
+        enemyWaveSystem_Ref = CustomGlobalSystemsGameObj.GetComponent<EnemyWaveSystem>();
         if (plrRef == null || enemyTurnSyst_Ref == null)
         {
             print("Error w/ initialization of refrences!");

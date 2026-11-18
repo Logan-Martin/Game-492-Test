@@ -7,13 +7,15 @@ public class EnemySpawnerScript : MonoBehaviour
     [SerializeField] private GameObject enemyFolder;
     [SerializeField] private bool spawnOnStart = false;
 
-    public void SpawnEnemy()
+    public GameObject SpawnEnemy() // Returns spawned enemy
     {
         GameObject clonedObj = Instantiate(prefabObj, enemyFolder.transform);
         clonedObj.transform.position = this.gameObject.transform.position;
 
         EnemyStateSystem stateSystem = clonedObj.gameObject.GetComponent<EnemyStateSystem>();
-        stateSystem.SetEnemyState(EnemyStateSystem.EnemyState.Spawning);        
+        stateSystem.SetEnemyState(EnemyStateSystem.EnemyState.Spawning);  
+        
+        return clonedObj;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
