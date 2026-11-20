@@ -1634,7 +1634,12 @@ MonoBehaviour:
       totalPopulationAllowedAtOnce: 3
       totalEnemiesToSpawnThisWave: 10
       timeInSecondsToKeepSpawningEnemies: 0
-    - waveSpawners_ForWave: []
+    - waveSpawners_ForWave:
+      - {fileID: 4504465232997904562}
+      - {fileID: 1928722120}
+      - {fileID: 1386797385}
+      - {fileID: 1460121606}
+      - {fileID: 2126681450}
       completionRequirementType: 2
       enemiesToSpawnPerSpawner_atOnce: 1
       enemyWave_KeepPopulationSpawningMethod: 2
@@ -1642,6 +1647,7 @@ MonoBehaviour:
       totalEnemiesToSpawnThisWave: 0
       timeInSecondsToKeepSpawningEnemies: 90
     startWaveSequence_OnGameStart: 1
+    cooldownBetweenWaves: 2
 --- !u!1 &790479332
 GameObject:
   m_ObjectHideFlags: 3
@@ -2284,8 +2290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10410121, y: -0.012821989, z: 0.0013421894, w: 0.9944832}
-  m_LocalPosition: {x: 0.1546916, y: 2.42, z: -5.9980054}
+  m_LocalRotation: {x: 0.06336526, y: 0.000000116989504, z: -0.0000000074279987, w: 0.9979904}
+  m_LocalPosition: {x: 0, y: 1.2099999, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5251,7 +5257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4928ee42b83342b4a82b8d2d90c37f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
-  maxHealth: 100
+  maxHealth: 500
   playerRef: {fileID: 4757836857439838591}
   animator: {fileID: 5006512736820427414}
   damageColor: {r: 1, g: 0, b: 0, a: 1}

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class EnemyWaveSystem : MonoBehaviour
@@ -57,7 +59,8 @@ public class EnemyWaveSystem : MonoBehaviour
         private int numOfEnemiesSpawnedThisWave = 0;
 
         public float timeInSecondsToKeepSpawningEnemies = 0f; // for wave 4 use case
-        private float timeLeftToKeepSpawningEnemies = 0f;
+        private float timeCurrent = 0f;
+        private float timeStampOnStarted = 0f;
         // -------------- //
         public void SetEnemyWaveState(EnemyWaveState newState)
         {
@@ -92,15 +95,49 @@ public class EnemyWaveSystem : MonoBehaviour
             bool check = enemiesSpawnedByThisWave.Remove(enemyKilled_Obj);
             if (check == false) { print("Failed to remove killed enemy from GameObj list for Wave!"); return; }
 
-            this.currPopulation = enemiesSpawnedByThisWave.Count;
+            this.currPopulation -= 1; // handle population even if we dont need it
             enemyKilled_Obj.GetComponent<EnemyStateSystem>().OnEnemyDeath -= Handle_EnemyForWaveKilled_Event;
-            IncrementCondition();
 
-            if (this.enemyWave_KeepPopulationSpawningMethod == EnemyWave_KeepPopulationSpawningMethod.None)
+            // ========= //
+            switch (enemyWave_KeepPopulationSpawningMethod)
             {
-                //print("Dont need to track population");
-                return;
+                case (EnemyWave_KeepPopulationSpawningMethod.None):
+                    IncrementCondition();
+                    break;
+                case (EnemyWave_KeepPopulationSpawningMethod.EnemyCountToKill):
+                    IncrementCondition();
+                    if (numOfEnemiesSpawnedThisWave <= totalEnemiesToSpawnThisWave)
+                    {
+                        // then keep spawning, if we can based on Population limit
+                        if (currPopulation <= totalPopulationAllowedAtOnce)
+                        {
+                            SpawnOneEnemy_Helper_ForInfSpawnCase();
+                        }
+                    }
+                    
+                    break;
+                case (EnemyWave_KeepPopulationSpawningMethod.TimeBased):
+                    timeCurrent = Time.time;
+                    float timeDiff = (timeCurrent - timeStampOnStarted);
+                    print("TimeDiff: " + timeDiff);
+
+                    if (timeDiff <= timeInSecondsToKeepSpawningEnemies)
+                    {
+                        // Keep Spawning
+                        if (currPopulation <= totalPopulationAllowedAtOnce)
+                        {
+                            SpawnOneEnemy_Helper_ForInfSpawnCase();
+                        }
+                    }
+                    else // No need to keep spawning 
+                    {
+                        IncrementCondition(); // ideally, or should set 1/1 conds
+                    }
+
+                    break;
             }
+
+            // ========== //
         }
 
         public void CompleteWave()
@@ -122,7 +159,32 @@ public class EnemyWaveSystem : MonoBehaviour
             }
         }
 
-        public List<GameObject> SpawnEnemies_Helper(int numOfEnemiesToSpawnPerSpawner)
+        public GameObject GetRandomSpawnerFromList_Helper()
+        {
+            GameObject selected = null;
+            int num = UnityEngine.Random.Range(0, waveSpawners_ForWave.Length);
+            selected = waveSpawners_ForWave[num];
+
+            return selected;
+        }
+
+        public bool SpawnOneEnemy_Helper_ForInfSpawnCase()
+        {
+            GameObject spawner = GetRandomSpawnerFromList_Helper();
+            EnemySpawnerScript enemySpawnerScript = spawner.GetComponent<EnemySpawnerScript>();
+            if (enemySpawnerScript == null) { print("Error, EnemySpawnerScript is null! Trying to cont."); return false; }
+
+
+            GameObject enemy = enemySpawnerScript.SpawnEnemy();
+            if (enemy == null) { print("Error getting Enemy GameObj from SpawnEnemy() call. Trying to cont."); return false; }
+            enemy.GetComponent<EnemyStateSystem>().OnEnemyDeath += Handle_EnemyForWaveKilled_Event;
+
+            enemiesSpawnedByThisWave.Add(enemy);
+            numOfEnemiesSpawnedThisWave++;
+            currPopulation++;
+            return true;
+        }
+        public void SpawnEnemies_Helper(int numOfEnemiesToSpawnPerSpawner)
         {
             List<GameObject> spawnedEnemyList = new List<GameObject>();
 
@@ -131,7 +193,6 @@ public class EnemyWaveSystem : MonoBehaviour
             if (local_spawnersList.Length == 0)
             {
                 print("Error: not using local_spawnersList bc it's empty. Haven't implemented using Group list yet.");
-                return spawnedEnemyList;
             }
 
 
@@ -145,31 +206,44 @@ public class EnemyWaveSystem : MonoBehaviour
 
                     GameObject enemy = enemySpawnerScript.SpawnEnemy();
                     if (enemy == null) { print("Error getting Enemy GameObj from SpawnEnemy() call. Trying to cont."); continue; }
-                    spawnedEnemyList.Add(enemy);
+                    spawnedEnemyList.Add(enemy); // local one
+                    
+                    enemy.GetComponent<EnemyStateSystem>().OnEnemyDeath += Handle_EnemyForWaveKilled_Event;
+
+                    numOfEnemiesSpawnedThisWave++;
+                    currPopulation++;
                 }
             }
 
-            return spawnedEnemyList;
+            enemiesSpawnedByThisWave.AddRange(spawnedEnemyList);
+            this.currPopulation = enemiesSpawnedByThisWave.Count;
         }
 
         public void SetUpConditionsForWave()
         {
             if (completionRequirementType == EnemyWaveCompletionRequirementType.DefeatAllEnemies)
-            {
-                int check = waveSpawners_ForWave.Length * enemiesToSpawnPerSpawner_atOnce;
-                if (check == 0)
+            {                
+                switch(enemyWave_KeepPopulationSpawningMethod)
                 {
-                    Debug.Log("ERROR?!");
-                }
-                Debug.Log(check);
-                totalEnemiesToSpawnThisWave = check;
-                condsNeeded = totalEnemiesToSpawnThisWave;
+                    case (EnemyWave_KeepPopulationSpawningMethod.None):
+                        int check = waveSpawners_ForWave.Length * enemiesToSpawnPerSpawner_atOnce;
+                        if (check == 0)
+                        {
+                            Debug.Log("ERROR?!");
+                        }
+                        Debug.Log(check);
 
+                        totalEnemiesToSpawnThisWave = check;
+                        condsNeeded = totalEnemiesToSpawnThisWave;
+                        break;
+                    case (EnemyWave_KeepPopulationSpawningMethod.EnemyCountToKill):
+                        condsNeeded = totalEnemiesToSpawnThisWave; // set in editor to 10 for use case of Wave 3
+                        break;
+                    case (EnemyWave_KeepPopulationSpawningMethod.TimeBased):
+                        condsNeeded = 1; // of which is just the timer req.
+                        break;
+                }
                 Debug.Log("Set up Wave Conditions!");
-                //if (enemyWave_KeepPopulationSpawningMethod != EnemyWave_KeepPopulationSpawningMethod.None)
-                //{
-                //    condsNeeded++; 
-                //}
             }
 
         }
@@ -177,16 +251,7 @@ public class EnemyWaveSystem : MonoBehaviour
         public void StartWave()
         {
             List<GameObject> enemiesSpawned = new List<GameObject>();
-            enemiesSpawned = SpawnEnemies_Helper(enemiesToSpawnPerSpawner_atOnce);
-            if (enemiesSpawned.Count == 0) { print("Error: enemiesSpawned is 0?"); return; }
-
-            enemiesSpawnedByThisWave.AddRange(enemiesSpawned);
-            this.currPopulation = enemiesSpawnedByThisWave.Count;
-
-            foreach (GameObject enemy in enemiesSpawned)
-            {
-                enemy.GetComponent<EnemyStateSystem>().OnEnemyDeath += Handle_EnemyForWaveKilled_Event;
-            }
+            SpawnEnemies_Helper(enemiesToSpawnPerSpawner_atOnce);
         }
     }
 
