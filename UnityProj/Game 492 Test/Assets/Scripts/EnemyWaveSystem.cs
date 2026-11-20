@@ -58,6 +58,29 @@ public class EnemyWaveSystem : MonoBehaviour
 
         public float timeInSecondsToKeepSpawningEnemies = 0f; // for wave 4 use case
         private float timeLeftToKeepSpawningEnemies = 0f;
+        // -------------- //
+        public void SetEnemyWaveState(EnemyWaveState newState)
+        {
+            switch(newState)
+            {
+                case EnemyWaveState.None:
+                    break;
+                case EnemyWaveState.WaitingToStart:
+                    SetUpConditionsForWave();
+                    break;
+                case EnemyWaveState.InProgress:
+                    SetUpConditionsForWave(); // for init starting one?
+                    StartWave();
+                    break;
+                case EnemyWaveState.Completed:
+                    CompleteWave();
+                    break;
+            }
+            currState = newState;
+        }
+
+        // -------------- //
+
 
         public void Handle_EnemyForWaveKilled_Event(GameObject enemyKilled_Obj)
         { // count do the check on the correct wave and stuff here?
@@ -82,7 +105,6 @@ public class EnemyWaveSystem : MonoBehaviour
 
         public void CompleteWave()
         {
-            currState = EnemyWaveState.Completed;
             print("Wave completed!");
 
             OnWaveCompleted?.Invoke();
@@ -96,7 +118,7 @@ public class EnemyWaveSystem : MonoBehaviour
             if (condsMet >= condsNeeded)
             {
                 condsMet = condsNeeded;
-                CompleteWave();
+                SetEnemyWaveState(EnemyWaveState.Completed);
             }
         }
 
@@ -134,10 +156,16 @@ public class EnemyWaveSystem : MonoBehaviour
         {
             if (completionRequirementType == EnemyWaveCompletionRequirementType.DefeatAllEnemies)
             {
-                totalEnemiesToSpawnThisWave = waveSpawners_ForWave.Length * enemiesToSpawnPerSpawner_atOnce;
+                int check = waveSpawners_ForWave.Length * enemiesToSpawnPerSpawner_atOnce;
+                if (check == 0)
+                {
+                    Debug.Log("ERROR?!");
+                }
+                Debug.Log(check);
+                totalEnemiesToSpawnThisWave = check;
                 condsNeeded = totalEnemiesToSpawnThisWave;
 
-                print("Set up Wave Conditions!");
+                Debug.Log("Set up Wave Conditions!");
                 //if (enemyWave_KeepPopulationSpawningMethod != EnemyWave_KeepPopulationSpawningMethod.None)
                 //{
                 //    condsNeeded++; 
@@ -148,9 +176,6 @@ public class EnemyWaveSystem : MonoBehaviour
 
         public void StartWave()
         {
-            SetUpConditionsForWave();
-
-            currState = EnemyWaveState.InProgress;
             List<GameObject> enemiesSpawned = new List<GameObject>();
             enemiesSpawned = SpawnEnemies_Helper(enemiesToSpawnPerSpawner_atOnce);
             if (enemiesSpawned.Count == 0) { print("Error: enemiesSpawned is 0?"); return; }
@@ -202,7 +227,7 @@ public class EnemyWaveSystem : MonoBehaviour
             yield return new WaitForSeconds(delay);
 
             Debug.Log("Starting wave #" + (currWaveIndex + 1));
-            currWave.StartWave();
+            currWave.SetEnemyWaveState(EnemyWaveState.InProgress);
         }
         // ================================== //
 
@@ -236,7 +261,7 @@ public class EnemyWaveSystem : MonoBehaviour
         {
             EnemyWave enemyWave = new EnemyWave();
             enemyWave.enemiesToSpawnPerSpawner_atOnce = enemiesToSpawnPerSpawner;
-            enemyWave.currState = EnemyWaveState.WaitingToStart;
+            enemyWave.SetEnemyWaveState(EnemyWaveState.WaitingToStart);
             //enemyWave.completionRequirementState = EnemyWaveCompletionRequirementState.Timed;
 
             newWavesGroup.wavesList.Add(enemyWave);

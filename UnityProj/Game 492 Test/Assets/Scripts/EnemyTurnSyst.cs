@@ -87,7 +87,7 @@ public class EnemyTurnSyst : MonoBehaviour
                 float localScore = ((tSinceLastAttack_Normalized_Clamped * TimeWeight) 
                                   + (distSqr_Normalized_Clamped * DistWeight));
 
-                print("localScore: " + localScore);
+                //print("localScore: " + localScore);
                 if (score != 0)
                 {
                     if (localScore < score) // whoever closest 
