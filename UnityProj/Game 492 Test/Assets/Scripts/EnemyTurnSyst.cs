@@ -32,6 +32,19 @@ public class EnemyTurnSyst : MonoBehaviour
             print("error! failed to remove enemy from turn list?!");
         }
     }
+    // -----------//
+    private void RemoveEnemyFromTurnSystem_ByIndex(int i)
+    {
+        enemyList.RemoveAt(i);
+    }
+    public void RemoveEnemyBatch_FromTurnSystem_ByIndex(List<int> iList)
+    {
+        for (int i = 0; i < iList.Count; i++)
+        {
+            RemoveEnemyFromTurnSystem_ByIndex(iList[i]);
+        }
+    }
+    // ------ //
 
     private GameObject PickEnemyToDoTurn()
     {
@@ -41,8 +54,17 @@ public class EnemyTurnSyst : MonoBehaviour
         // attackedRecently
         // ?cooldown 
 
+        List<int> intsToRemove = new List<int>();
+        int index = 0;
         foreach (var item in enemyList)
         {
+            if (item == null) // For when Enemy is Null, remove it from list in batch at end of this
+            {
+                intsToRemove.Add(index);
+                continue;
+            }
+            index++;
+
             EnemyStateSystem enemyStateSyst_Ref = item.GetComponent<EnemyStateSystem>();
             EnemyStateSystem.EnemyState currState = enemyStateSyst_Ref.GetCurrEnemyState();
             if (currState == EnemyStateSystem.EnemyState.WaitingForTurn) // bc can be Approaching, WaitingForTurn, Attacking, Stunned
@@ -84,7 +106,14 @@ public class EnemyTurnSyst : MonoBehaviour
             {
                 // edge case?
             }
+
         }
+
+        if (intsToRemove.Count > 0)
+        {
+            RemoveEnemyBatch_FromTurnSystem_ByIndex(intsToRemove);
+        }
+
         return picked;
     }
 

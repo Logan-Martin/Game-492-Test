@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -31,6 +32,8 @@ public class EnemyWaveSystem : MonoBehaviour
     [System.Serializable]
     public class EnemyWave
     {
+        public Action OnWaveCompleted; // Note: EnemyWaveGroup listens
+
         public GameObject[] waveSpawners_ForWave = new GameObject[0]; // can be NULL / empty! refer to EnemyWave_Group's waveSpawners_Main list
         private List<GameObject> enemiesSpawnedByThisWave = new List<GameObject>();
         //private List<>
@@ -67,23 +70,29 @@ public class EnemyWaveSystem : MonoBehaviour
             if (check == false) { print("Failed to remove killed enemy from GameObj list for Wave!"); return; }
 
             this.currPopulation = enemiesSpawnedByThisWave.Count;
+            enemyKilled_Obj.GetComponent<EnemyStateSystem>().OnEnemyDeath -= Handle_EnemyForWaveKilled_Event;
+            IncrementCondition();
+
             if (this.enemyWave_KeepPopulationSpawningMethod == EnemyWave_KeepPopulationSpawningMethod.None)
             {
-                print("Dont need to track population"); return;
+                //print("Dont need to track population");
+                return;
             }
-
-            enemyKilled_Obj.GetComponent<EnemyStateSystem>().OnEnemyDeath -= Handle_EnemyForWaveKilled_Event;
         }
 
         public void CompleteWave()
         {
             currState = EnemyWaveState.Completed;
             print("Wave completed!");
+
+            OnWaveCompleted?.Invoke();
         }
 
         public void IncrementCondition()
         {
             condsMet++;
+            print("Incrementing Condition for Wave! | " + condsMet + " / " + condsNeeded);
+
             if (condsMet >= condsNeeded)
             {
                 condsMet = condsNeeded;
@@ -121,8 +130,26 @@ public class EnemyWaveSystem : MonoBehaviour
             return spawnedEnemyList;
         }
 
+        public void SetUpConditionsForWave()
+        {
+            if (completionRequirementType == EnemyWaveCompletionRequirementType.DefeatAllEnemies)
+            {
+                totalEnemiesToSpawnThisWave = waveSpawners_ForWave.Length * enemiesToSpawnPerSpawner_atOnce;
+                condsNeeded = totalEnemiesToSpawnThisWave;
+
+                print("Set up Wave Conditions!");
+                //if (enemyWave_KeepPopulationSpawningMethod != EnemyWave_KeepPopulationSpawningMethod.None)
+                //{
+                //    condsNeeded++; 
+                //}
+            }
+
+        }
+
         public void StartWave()
         {
+            SetUpConditionsForWave();
+
             currState = EnemyWaveState.InProgress;
             List<GameObject> enemiesSpawned = new List<GameObject>();
             enemiesSpawned = SpawnEnemies_Helper(enemiesToSpawnPerSpawner_atOnce);
@@ -145,10 +172,53 @@ public class EnemyWaveSystem : MonoBehaviour
         public GameObject[] waveSpawners_Main;
         public List<EnemyWave> wavesList = new List<EnemyWave>();
         public bool startWaveSequence_OnGameStart = false;
+        public float cooldownBetweenWaves = 2f; // in seconds
+        private int currWaveIndex = 0;
 
-        public void StartWaveSequence()
+        // ==== From Google AI Search: ====== //
+        // -- Prompts: --
+        // 1st: 'Unity invoke thing waitForSeconds to wait' + Code
+        
+        // 2nd: 'can i just do the IEnumerator StartCurrentWave function in the EnemyWaveSystem Script
+              // and pass the current wave?'
+        
+        // 3rd: i think i like including the MonoBehavior better.
+             // what are my options there and what is NEEDED for the EnemyWave_Group class
+        // ============== //
+        [NonSerialized] public MonoBehaviour runner; // NEEDED: Reference to run coroutines
+
+        // NEEDED: Pass 'this' from EnemyWaveSystem when starting
+        public void StartWaveSequence(MonoBehaviour monoRunner)
         {
-            wavesList[0].StartWave();
+            runner = monoRunner;
+            runner.StartCoroutine(StartCurrentWave(cooldownBetweenWaves));
+        }
+        public IEnumerator StartCurrentWave(float delay)
+        {
+            EnemyWave currWave = wavesList[currWaveIndex];
+            currWave.OnWaveCompleted += TryToGoToNextWaveInList;
+            Debug.Log("Got new Wave & connected event. Waiting cooldown.");
+
+            yield return new WaitForSeconds(delay);
+
+            Debug.Log("Starting wave #" + (currWaveIndex + 1));
+            currWave.StartWave();
+        }
+        // ================================== //
+
+        private void TryToGoToNextWaveInList()
+        {
+            wavesList[currWaveIndex].OnWaveCompleted -= TryToGoToNextWaveInList; // unsub after call
+            
+            currWaveIndex++;
+            if (currWaveIndex < wavesList.Count) // if within wavesList count
+            {
+                runner.StartCoroutine(StartCurrentWave(cooldownBetweenWaves)); // continue // From AI
+            }
+            else
+            {
+                print("All waves completed!");
+            }
         }
 
     }
@@ -187,8 +257,8 @@ public class EnemyWaveSystem : MonoBehaviour
         if (EnemyWaveGroups_SetInEditor.Count == 0) { print("No Wave Groups set in Editor!"); return; }
         foreach (EnemyWave_Group waveGroup in EnemyWaveGroups_SetInEditor)
         {
-            if (waveGroup.startWaveSequence_OnGameStart == false) { return; }
-            waveGroup.StartWaveSequence();
+            if (waveGroup.startWaveSequence_OnGameStart == false) { continue; }
+            waveGroup.StartWaveSequence(this);
         }
     }
 }

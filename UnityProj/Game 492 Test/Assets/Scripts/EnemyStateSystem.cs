@@ -85,7 +85,7 @@ public class EnemyStateSystem : MonoBehaviour
                     OnEnemyDeath?.Invoke(this.gameObject); // Event call, picked up by EnemyWaveSystem.cs
                     break;
                 case EnemyState.Dead:
-                    //Destroy(this.gameObject);
+                    Destroy(this.gameObject, 2f);
                     break;
             }
         }
